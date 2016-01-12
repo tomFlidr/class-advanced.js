@@ -50,3 +50,31 @@ childInstance.parentDynamicMethod('cc', 'dd');		// cc dd
 ChildClassName.childStaticMethod('e', 'f');			// e f
 ChildClassName.parentStaticMethod('ee', 'ff');		// ee ff
 ```
+
+## To use class.js in Node.JS:
+- modify class.js file - define $class object into global object and call require like this:
+
+class.js:
+```
+global.$class=function(){function a(b){fun..... // rest of library definition 
+```
+
+app.js:
+```
+require('./class.js');
+var ClassName = $class({.....});
+```
+
+- or modify class.js file - wrap $class object into module.exports and call require like this:
+class.js:
+```
+module.exports=function(){
+var $class=function(){function a(b){fun..... // rest of library definition 
+return $class;};
+```
+
+app.js
+```
+var $class = require('./class.js')();
+var ClassName = $class({.....});
+```
