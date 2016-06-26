@@ -3,7 +3,7 @@
 - unique javascript helper to create Classes with possibilities to call dynamic and static parent methods
 - usage: browser or WSH (Windows Script Host), Node.JS
 
-```
+```javascript
 // Declaration
 
 var ParentClassName = $class({
@@ -55,26 +55,26 @@ ChildClassName.parentStaticMethod('ee', 'ff');		// ee ff
 - modify class.js file - define $class object into global object and call require like this:
 
 class.js:
-```
+```javascript
 global.$class=function(){function a(b){fun..... // rest of library definition 
 ```
 
 app.js:
-```
+```javascript
 require('./class.js');
 var ClassName = $class({.....});
 ```
 
 - or modify class.js file - wrap $class object into module.exports and call require like this:
 class.js:
-```
+```javascript
 module.exports=function(){
 var $class=function(){function a(b){fun..... // rest of library definition 
 return $class;};
 ```
 
 app.js
-```
+```javascript
 var $class = require('./class.js')();
 var ClassName = $class({.....});
 ```
