@@ -1,4 +1,9 @@
 var examplesOnLoadHandler = function () {
+	if (location.origin == 'file://') {
+		code.innerHTML = 'Please place this example on web server <br />and run page over http:// protocol <br />to load source Javascrit code here.';
+		code.style.background = 'orange';
+		return;
+	}
 	var oldIe = document.all;
 	var createAndAppendElement = function (name, attrs) {
 		var elm = document.createElement(name);

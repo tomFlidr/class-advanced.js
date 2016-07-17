@@ -40,7 +40,11 @@ console.log(dog instanceof Animals.Dog); // true
 console.log(dog instanceof Date); // false
 
 console.log(dog.self.Name); // 'Dog'
+console.log(dog.self.Fullname); // 'Animals.Dog'
+console.log(dog.self.Namespace); // 'Animals'
 console.log(dog.self.Extend.Name); // 'Animal'
+console.log(dog.self.Extend.Fullname); // 'Animal'
+console.log(dog.self.Extend.Namespace); // ''
 
 console.log(dog.self === Animals.Dog); // true
 console.log(dog.self.Extend === Animal); // true

@@ -1,7 +1,7 @@
 /**
  * Javascript Class Helper
  * @author Tom Flidr | tomflidr(at)gmail(dot)com
- * @version 1.0
+ * @version 1.1
  * @date 2016-07-15
  * @usage
 
@@ -36,11 +36,17 @@ Class = (function (_globalScope) {
 	Function.prototype.bind||(Function.prototype.bind=function(a){if(typeof this!=='function'){throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');}var b=[].slice,c='prototype',d=b.call(arguments,1),e=this,f=function(){},g=function(){return e.apply(this instanceof f?this:a,d.concat(b.call(arguments)))};if(this[c]){f[c]=this[c]}g[c]=new f();return g});
 	// Class helper definition
 	var $class = function () {
-		var args = [].slice.apply(arguments);
-		if (typeof (args[0]) == 'string') {
-			return $class._defineNamedClass(args[0], args.length > 1 ? args[1] : {});
+		var _args = [].slice.apply(arguments),
+			_constants = $class['Constants'],
+			_defaultClassName = 'Class',
+			_result;
+		if (typeof (_args[0]) == 'string') {
+			return $class._defineNamedClass(_args[0], _args.length > 1 ? _args[1] : {});
 		} else {
-			return $class._defineClass(args[0], 'Class');
+			_result = $class._defineClass(_args[0], _defaultClassName);
+			_result[_constants['Namespace']] = '';
+			_result[_constants['Fullname']] = _defaultClassName;
+			return _result;
 		}
 	};
 	$class['Constants'] = {
@@ -50,6 +56,8 @@ Class = (function (_globalScope) {
 		'Static'			: 'Static',
 		'Constructor'		: 'Constructor',
 		'Name'				: 'Name',
+		'Namespace'			: 'Namespace',
+		'Fullname'			: 'Fullname',
 		'self'				: 'self',
 		'parent'			: 'parent'
 	};
@@ -91,13 +99,12 @@ Class = (function (_globalScope) {
 	};
 	$class._defineNamedClass = function (fullName, cfg) {
 		var _explodedName = fullName.split('.'),
-			_name = _explodedName[_explodedName.length - 1],
+			_name = _explodedName.pop(),
 			_namePart = '',
 			_constants = $class['Constants'],
 			_currentScope = _globalScope,
-			_selfStr = $class['Constants']['self'],
 			_result;
-		for (var i = 0, l = _explodedName.length - 1; i < l; i += 1) {
+		for (var i = 0, l = _explodedName.length; i < l; i += 1) {
 			_namePart = _explodedName[i];
 			if (!(_namePart in _currentScope)) {
 				_currentScope[_namePart] = {};
@@ -106,10 +113,12 @@ Class = (function (_globalScope) {
 		}
 		if (cfg.toString === {}.toString) {
 			cfg['toString'] = function () {
-				return '[object ' + this[_constants['self']][_constants['Name']] + ']';
+				return '[object ' + fullName + ']';
 			}
 		}
 		_result = $class._defineClass(cfg, _name);
+		_result[_constants['Namespace']] = _explodedName.join('.');
+		_result[_constants['Fullname']] = fullName;
 		_currentScope[_name] = _result;
 		return _result;
 	};
@@ -376,4 +385,4 @@ Class = (function (_globalScope) {
 	};
 	_globalScope['Class'] = $class;
 	return $class;
-})(Boolean(typeof (module) !== 'undefined' && module.exports) ? global : this);
+})(Boolean(typeof (module) !== 'undefined' && module['exports']) ? global : this);

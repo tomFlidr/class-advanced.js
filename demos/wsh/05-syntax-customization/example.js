@@ -61,7 +61,11 @@ console.log(dog instanceof Animals.Dog); // true
 console.log(dog instanceof Date); // false
 
 console.log(dog.$self.$name); // 'Dog'
+console.log(dog.$self.$fullname); // 'Animals.Dog'
+console.log(dog.$self.$namespace); // 'Animals'
 console.log(dog.$self.$extends.$name); // 'Animal'
+console.log(dog.$self.$extends.$fullname); // 'Animal'
+console.log(dog.$self.$extends.$namespace); // ''
 
 console.log(dog.$self === Animals.Dog); // true
 console.log(dog.$self.$extends === Animal); // true
