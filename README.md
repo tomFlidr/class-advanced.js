@@ -1,7 +1,22 @@
-# Class.js
+# Javascript Class (Class.js)
 
-- unique javascript helper to create Classes with possibilities to call any dynamic and static parent method anywhere
-- usage: browser (MSIE6+, Safari, Opera, Chrome), Node.js and WSH (Windows Script Host)
+Unique javascript library to create Classes.
+
+* [class.min.js download](https://tomflidr.github.io/class.js/src/class.min.js)
+
+```html
+<script type="text/javascript" src="https://tomflidr.github.io/class.js/src/class.min.js"></script>
+```
+## Features
+- unique javascript library to create Classes.
+- possibilities to call any dynamic and static parent method anywhere.
+- very fast, effective, supersmall, multi environment library.
+- inspired by PHP OOP, Ext.JS, Prototype.JS syntax.
+
+### Supported environments
+ - browsers (MSIE6+, Safari, Opera, Chrome)
+ - Node.js
+ - WSH (Windows Script Host)
 
 ## Basic Class - Animal
 ```javascript
