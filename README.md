@@ -300,18 +300,20 @@ console.log(c); // [object C]
 ```
 ### Browser Usage
 ```html
+<!-- index.html: -->
 <script src="./class.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-var MyClass = Class({
-	Constructor: function () {
-		console.log("It works!");
-	}
-});
-var myInstance = new MyClass(); // "It works!
+	var MyClass = Class({
+		Constructor: function () {
+			console.log("It works!");
+		}
+	});
+	var myInstance = new MyClass(); // "It works!
 </script>
 ```
 ### Node.js Usage
 ```javascript
+// app.js:
 require('./class.min.js');
 var MyClass = Class({
 	Constructor: function () {
@@ -319,4 +321,21 @@ var MyClass = Class({
 	}
 });
 var myInstance = new MyClass(); // "It works!
+// to run the code - type into command line window: "node app.js"
+```
+### Windows Script Host Usage
+```javascript
+// app.wsf
+<job>
+	<script type="JScript" src="./class.min.js"></script>
+	<script type="JScript">
+		var MyClass = Class({
+			Constructor: function () {
+				WScript.echo("It works!");
+			}
+		});
+		var myInstance = new MyClass(); // "It works!
+	</script>
+</job>
+// to run the code - doubleclick on file: "app.wsf"
 ```
