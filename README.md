@@ -7,8 +7,11 @@ Javascript library to create prototyped classes.
 ```html
 <script type="text/javascript" src="https://tomflidr.github.io/class.js/src/class.min.js"></script>
 ```
+## DEMOS
+- [Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
+
 ## Features
-- very fast, effective, supersmall - all in 320 lines, **minimized: 5.2 KB**, **gzipped: 1.9 KB**
+- very fast, effective, supersmall - all in 320 lines, **minimized: 5.3 KB**, **gzipped: 1.9 KB**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
   - **Node.js**
@@ -391,10 +394,35 @@ var myInstance = new MyClass(); // "It works!
 
 ### Syntax Customization
 ```javascript
-var MyClass = Class({
-	Constructor: function () {
+var $class = Class;
+$class.$define = Class.Define;
+$class.$create = Class.Create;
+$class.CustomizeSyntax({
+	ClassImprint	: '$classId',
+	InstanceImprint	: '$instanceId',
+	Extend			: '$extends',
+	Static			: '$static',
+	Constructor		: '$constructor',
+	Name			: '$name',
+	self			: '$self',
+	parent			: '$parent'
+});
+// new class declaration syntax
+var MyClass = $class({
+	$extends: ParentClass,
+	$static: {
+		create: function () {
+			return new $self();
+		}
+	},
+	$constructor: function () {
+		this.$parent();
 		console.log("It works!");
 	}
 });
+// instance creating
 var myInstance = new MyClass(); // "It works!
+
 ```
+
+## DEMOS
