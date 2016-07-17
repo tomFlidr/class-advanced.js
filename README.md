@@ -1,80 +1,34 @@
-# class.js
+# Class.js
 
-- unique javascript helper to create Classes with possibilities to call dynamic and static parent methods
-- usage: browser or WSH (Windows Script Host), Node.JS
+- unique javascript helper to create Classes with possibilities to call any dynamic and static parent method anywhere
+- usage: browser (MSIE6+, Safari, Opera, Chrome), Node.js and WSH (Windows Script Host)
 
+## Basic Class - Animal
 ```javascript
-// Declaration
-
-var ParentClassName = $class({
-    $static: {
-        parentStaticMethod: function (e, f) {
-            console.log(e, f);
-        }
-    },
-    $constructor: function (a, b) {
-        console.log(a, b);
-    },
-    $dynamic: {
-        parentDynamicMethod: function (c, d) {
-            console.log(c, d);
-        }
-    }
+// declare class with internal name 'Class'
+var Animal = Class({
+	Static: {
+		Create: function (name, sound) {
+			return new this.self(name, sound);
+		}
+	},
+	Constructor: function (name, sound) {
+		this.name = name;
+		this.sound = sound;
+	},
+	name: '',
+	sound: '',
+	ShowYourself: function () {
+		console.log(this.name + " - " + this.sound);
+	},
+	toString: function () {
+		return "[object Animal]";
+	}
 });
+// use
+var dog = Animal.Create("Charlie", "wrr haf!");
+dog.ShowYourself(); // 'Charlie - wrr haf!'
 
-var ChildClassName = $class({
-    $extends: ParentClassName,
-    $static: {
-        childStaticMethod: function (e, f) {
-            this.$base('parentStaticMethod', e, f);
-        }
-    },
-    $constructor: function (a, b) {
-        this.$base('$constructor', a, b);
-    },
-    $dynamic: {
-        childDynamicMethod: function (c, d) {
-            this.$base('parentDynamicMethod', c, d);
-        }
-    }
-});
-
-
-// Usage
-
-var childInstance = new ChildClassName('a', 'b');	// a b
-
-childInstance.childDynamicMethod('c', 'd');			// c d
-childInstance.parentDynamicMethod('cc', 'dd');		// cc dd
-
-ChildClassName.childStaticMethod('e', 'f');			// e f
-ChildClassName.parentStaticMethod('ee', 'ff');		// ee ff
-```
-
-## To use class.js in Node.JS:
-- modify class.js file - define $class object into global object and call require like this:
-
-class.js:
-```javascript
-global.$class=function(){function a(b){fun..... // rest of library definition 
-```
-
-app.js:
-```javascript
-require('./class.js');
-var ClassName = $class({.....});
-```
-
-- or modify class.js file - wrap $class object into module.exports and call require like this:
-class.js:
-```javascript
-module.exports=function(){
-var $class=function(){function a(b){fun..... // rest of library definition 
-return $class;};
-```
-
-app.js
-```javascript
-var $class = require('./class.js')();
-var ClassName = $class({.....});
+console.log(dog.self.Name); // 'Class'
+console.log(dog.toString()); // '[object Animal]'
 ```
