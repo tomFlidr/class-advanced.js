@@ -8,7 +8,11 @@ Javascript library to create prototyped classes.
 <script type="text/javascript" src="https://tomflidr.github.io/class.js/src/class.min.js"></script>
 ```
 ## DEMOS
-- [Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
+- [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
+- [2. Class Dog Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
+- [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
+- [4. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/04-class-a-b-c-and-parent-calls/index.html)
+- [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
 
 ## Features
 - very fast, effective, supersmall - all in 320 lines, **minimized: 5.3 KB**, **gzipped: 1.9 KB**
