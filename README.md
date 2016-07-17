@@ -47,7 +47,7 @@ Javascript library to create prototyped classes.
       var instance = Class.Create('ClassName', [param1, param2]);
   - **inheritance checking** by javascript 'instanceof' keyword
 
-## Basic Class - Animal
+## 1. Basic Class - Animal
 ```javascript
 // declare class with internal name 'Class'
 var Animal = Class({
@@ -76,7 +76,7 @@ dog.ShowYourself(); // 'Charlie - wrr haf!'
 console.log(dog.self.Name); // 'Class'
 console.log(dog.toString()); // '[object Animal]'
 ```
-## Class Dog Extends Animal
+## 2. Class Dog Extends Animal
 ```javascript
 Class.Define('Animal', {
 	Static: {
@@ -131,7 +131,7 @@ console.log(typeof Animals.Dog); // 'function'
 console.log(typeof dog); // 'object'
 ```
 
-## Three Extended Classes With Static Members
+## 3. Three Extended Classes With Static Members
 ```javascript
 Class.Define('Person', {
 	Static: {
@@ -196,7 +196,7 @@ console.log(secretary.GetInfo());
 console.log(prManager.GetInfo());
 ```
 
-## Class A, B, C And Parent Methods Calls Flows
+## 4. Class A, B, C And Parent Methods Calls Flows
 ```javascript
 var A = Class({
 	Static: {
@@ -342,6 +342,38 @@ var c = C.Create(1, 2, 3)
 
 console.log(c); // [object C]
 ```
+
+### 5. Syntax Customization
+```javascript
+var $class = Class;
+$class.$define = Class.Define;
+$class.$create = Class.Create;
+$class.CustomizeSyntax({
+	ClassImprint	: '$classId',
+	InstanceImprint	: '$instanceId',
+	Extend			: '$extends',
+	Static			: '$static',
+	Constructor		: '$constructor',
+	Name			: '$name',
+	self			: '$self',
+	parent			: '$parent'
+});
+// new class declaration syntax
+var MyClass = $class({
+	$extends: ParentClass,
+	$static: {
+		create: function () {
+			return new $self();
+		}
+	},
+	$constructor: function () {
+		this.$parent();
+		console.log("It works!");
+	}
+});
+// instance creating
+var myInstance = new MyClass(); // "It works!
+```
 ### Browser Usage
 - install any browser if necessary (MSIE6+, Firefox, Google Chrome, Safari, Opera...)
 - create new empty text file with name "example.html":
@@ -396,37 +428,9 @@ var myInstance = new MyClass(); // "It works!
 </job>
 ```
 
-### Syntax Customization
-```javascript
-var $class = Class;
-$class.$define = Class.Define;
-$class.$create = Class.Create;
-$class.CustomizeSyntax({
-	ClassImprint	: '$classId',
-	InstanceImprint	: '$instanceId',
-	Extend			: '$extends',
-	Static			: '$static',
-	Constructor		: '$constructor',
-	Name			: '$name',
-	self			: '$self',
-	parent			: '$parent'
-});
-// new class declaration syntax
-var MyClass = $class({
-	$extends: ParentClass,
-	$static: {
-		create: function () {
-			return new $self();
-		}
-	},
-	$constructor: function () {
-		this.$parent();
-		console.log("It works!");
-	}
-});
-// instance creating
-var myInstance = new MyClass(); // "It works!
-
-```
-
 ## DEMOS
+- [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
+- [2. Class Dog Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
+- [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
+- [4. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/04-class-a-b-c-and-parent-calls/index.html)
+- [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
