@@ -15,7 +15,7 @@ Javascript library to create prototyped classes.
 - [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
 
 ## **Features**
-- very fast, effective, supersmall - all in 320 lines, **minimized: 5.3 KB**, **gzipped: 1.9 KB**
+- very fast, effective, supersmall - all in 320 lines, **minimized: 5.4 KB**, **gzipped: 2.0 KB**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
   - **Node.js**
@@ -38,8 +38,10 @@ Javascript library to create prototyped classes.
     - **this.parent.anyDynamicMethod.apply(this, [param1, param2]);** // in dynamic functions
   - posibility to get **class definition** by:
     - **this.self;** // without the need to know class name itself
-  - posibility to get **class name** by: 
-    - **this.self.Name;** // only if class is defined by Class.Define('ClassName', cfg);
+  - posibility to get class name / fullname / namespace (only if class is defined by Class.Define();) by: 
+    - **this.self.Fullname;**
+    - **this.self.Name;**
+    - **this.self.Namespace;**
   - posibility to **create instance by**:
     - classic Javascript **new keyword**:
       var instance = new ClassName(param1, param2);
