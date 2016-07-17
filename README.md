@@ -1,6 +1,6 @@
 # Javascript Class (Class.js)
 
-Unique javascript library to create Classes.
+Javascript library to create prototyped classes.
 
 * [class.min.js download](https://tomflidr.github.io/class.js/src/class.min.js)
 
@@ -8,15 +8,26 @@ Unique javascript library to create Classes.
 <script type="text/javascript" src="https://tomflidr.github.io/class.js/src/class.min.js"></script>
 ```
 ## Features
-- unique javascript library to create Classes.
-- possibilities to call any dynamic and static parent method anywhere.
-- very fast, effective, supersmall, multi environment library.
-- inspired by PHP OOP, Ext.JS, Prototype.JS syntax.
-
-### Supported environments
- - browsers (MSIE6+, Safari, Opera, Chrome)
- - Node.js
- - WSH (Windows Script Host)
+- very fast, effective, supersmall - all in 320 lines, **minimized: 5.2 KB**, **gzipped: 1.9 KB**
+- multi environment:
+  - browsers (MSIE6+, Safari, Opera, Chrome)
+  - Node.js
+  - WSH (Windows Script Host)
+  - Adobe (only old archived version 0.6)
+- inspired by PHP OOP, Ext.JS and Prototype.JS syntax
+- Function.prototype.bind polyfill included
+- possibility to define:
+  - Static elements
+  - parent class by Extend keyword
+  - Constructor method
+  - all other elements as dynamic elements
+  - possibility to call any dynamic and static parent method anywhere by:
+    - this.parent(); // in static and dynamic functions
+    - this.parent.anyStaticMethod(); // in static functions
+    - this.parent.anyDynamicMethod(); // in dynamic functions
+  - posibility to get class definition by this.self without the need to know class name itself
+  - posibility to get class name by this.self.Name if class is defined by Class.Define('ClassName', cfg);
+  - posibility to create instance by classic Javascript new keyword or by string with Class.Create('ClassName', argsArray);
 
 ## Basic Class - Animal
 ```javascript
