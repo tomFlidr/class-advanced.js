@@ -22,12 +22,22 @@ Javascript library to create prototyped classes.
   - Constructor method
   - all other elements as dynamic elements
   - possibility to call any dynamic and static parent method anywhere by:
-    - this.parent(); // in static and dynamic functions
-    - this.parent.anyStaticMethod(); // in static functions
-    - this.parent.anyDynamicMethod(); // in dynamic functions
-  - posibility to get class definition by this.self without the need to know class name itself
-  - posibility to get class name by this.self.Name if class is defined by Class.Define('ClassName', cfg);
-  - posibility to create instance by classic Javascript new keyword or by string with Class.Create('ClassName', argsArray);
+    - this.parent(param1, param2); // in static and dynamic functions
+    - this.parent.anyStaticMethod(param1, param2); // in static functions
+    - this.parent.anyDynamicMethod(param1, param2); // in dynamic functions
+    - this.parent.apply(this, [param1, param2]); // in static and dynamic functions
+    - this.parent.anyStaticMethod.apply(this, [param1, param2]); // in static functions
+    - this.parent.anyDynamicMethod.apply(this, [param1, param2]); // in dynamic functions
+  - posibility to get class definition by:
+    - this.self; // without the need to know class name itself
+  - posibility to get class name by: 
+    - this.self.Name; // only if class is defined by Class.Define('ClassName', cfg);
+  - posibility to create instance by:
+    - classic Javascript new keyword:
+      var instance = new ClassName(param1, param2);
+    - class name string with Class.Create method:
+      var instance = Class.Create('ClassName', [param1, param2]);
+  - inheritance checking by javascript 'instanceof' keyword
 
 ## Basic Class - Animal
 ```javascript
