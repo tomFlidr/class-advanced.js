@@ -299,21 +299,34 @@ var c = C.Create(1, 2, 3)
 console.log(c); // [object C]
 ```
 ### Browser Usage
+- install any browser if necessary (MSIE6+, Firefox, Google Chrome, Safari, Opera...)
+- create new empty text file with name "example.html":
+- open the file "example.html" in the browser to run
 ```html
-<!-- index.html: -->
-<script src="./class.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-	var MyClass = Class({
-		Constructor: function () {
-			console.log("It works!");
-		}
-	});
-	var myInstance = new MyClass(); // "It works!
-</script>
+<!DOCTYPE HTML>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<script src="./class.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var MyClass = Class({
+				Constructor: function () {
+					console.log("It works!");
+				}
+			});
+			var myInstance = new MyClass(); // "It works!
+		</script>	
+	</body>
+</html>
+
 ```
 ### Node.js Usage
+- install node.js from nodejs.org if necessary
+- create new empty text file with name "example.js":
+- type into command line window "node example.js" to run
 ```javascript
-// app.js:
 require('./class.min.js');
 var MyClass = Class({
 	Constructor: function () {
@@ -321,11 +334,11 @@ var MyClass = Class({
 	}
 });
 var myInstance = new MyClass(); // "It works!
-// to run the code - type into command line window: "node app.js"
 ```
 ### Windows Script Host Usage
-```javascript
-// app.wsf
+- create new empty text file with name "example.wsf":
+- doubleclick on the file "example.wsf" to run
+```html
 <job>
 	<script type="JScript" src="./class.min.js"></script>
 	<script type="JScript">
@@ -337,5 +350,4 @@ var myInstance = new MyClass(); // "It works!
 		var myInstance = new MyClass(); // "It works!
 	</script>
 </job>
-// to run the code - doubleclick on file: "app.wsf"
 ```
