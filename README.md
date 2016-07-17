@@ -1,4 +1,4 @@
-# Javascript Class (Class.js)
+# **Javascript Class (Class.js)**
 
 Javascript library to create prototyped classes.
 
