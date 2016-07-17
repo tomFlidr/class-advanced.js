@@ -1,0 +1,55 @@
+html,
+body{
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size:16px;
+	margin:10px;
+}
+h1{
+	padding:5px 15px 25px 15px;
+	border-bottom:1px solid #141418;
+}
+pre{
+	color:#fff;
+	background: #141418;
+	display: block;
+}
+pre code{
+	padding: 1em;
+	display: block;
+}
+table#columns{
+	width:100%;
+	border-collapse:collapse;
+	margin:0;
+}
+table#columns thead tr th{
+	padding:0 15px 0 15px;
+	border:0;
+	width:50%;
+	vertical-align:top;
+	text-align:left;
+}
+table#columns tbody tr td{
+	padding:15px;
+	border:0;
+	width:50%;
+	vertical-align:top;
+}
+table#columns tbody tr td .language-javascript{
+	margin:0;
+}
+table#columns tbody tr td div{
+	display: table;
+    width: 100%;
+	background: #141418;
+	border-radius: 0.3em;
+    margin:0;
+}
+table#columns tbody tr td div #result{
+	padding: 1em;
+	display: block;
+    width: auto;
+    #width: 100%;
+	text-shadow:0 1px rgba(0, 0, 0, 0.3);
+	color:orange;
+}
