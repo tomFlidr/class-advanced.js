@@ -86,8 +86,8 @@ console.log(dog.self.Extend.prototype == Animal.prototype); // true
 console.log(typeof Animals.Dog); // 'function'
 console.log(typeof dog); // 'object'
 ```
-Three Extended Classes With Static Members
-## 
+
+## Three Extended Classes With Static Members
 ```javascript
 Class.Define('Person', {
 	Static: {
