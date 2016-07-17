@@ -298,3 +298,25 @@ var c = C.Create(1, 2, 3)
 
 console.log(c); // [object C]
 ```
+### Browser Usage
+```html
+<script src="./class.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+var MyClass = Class({
+	Constructor: function () {
+		console.log("It works!");
+	}
+});
+var myInstance = new MyClass(); // "It works!
+</script>
+```
+### Node.js Usage
+```javascript
+require('./class.min.js');
+var MyClass = Class({
+	Constructor: function () {
+		console.log("It works!");
+	}
+});
+var myInstance = new MyClass(); // "It works!
+```
