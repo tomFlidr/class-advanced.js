@@ -1,6 +1,6 @@
 # **Javascript Class (Class.js)**
 
-Javascript library to create prototyped classes.
+ Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection and much more. For all browsers, Node.js and Windows Script Host.
 
 * [class.min.js download](https://tomflidr.github.io/class.js/src/class.min.js)
 
