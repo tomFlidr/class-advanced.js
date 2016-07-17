@@ -1,6 +1,6 @@
 # **Javascript Class (Class.js)**
 
-Javascript library to create prototyped classes.
+ Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection and much more. For all browsers, Node.js and Windows Script Host.
 
 * [class.min.js download](https://tomflidr.github.io/class.js/src/class.min.js)
 
@@ -15,7 +15,7 @@ Javascript library to create prototyped classes.
 - [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
 
 ## **Features**
-- very fast, effective, supersmall - all in 320 lines, **minimized: 5.3 KB**, **gzipped: 1.9 KB**
+- very fast, effective, supersmall - all in 320 lines, **minimized: 5.4 KB**, **gzipped: 2.0 KB**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
   - **Node.js**
@@ -29,23 +29,27 @@ Javascript library to create prototyped classes.
   - parent class by **Extend** keyword
   - **Constructor** method
   - all **other elements as dynamic** elements
-  - possibility to call any dynamic and static parent method anywhere by:
-    - **this.parent(param1, param2);** // in static and dynamic functions
-    - **this.parent.anyStaticMethod(param1, param2);** // in static functions
-    - **this.parent.anyDynamicMethod(param1, param2);** // in dynamic functions
-    - **this.parent.apply(this, [param1, param2]);** // in static and dynamic functions
-    - **this.parent.anyStaticMethod.apply(this, [param1, param2]);** // in static functions
-    - **this.parent.anyDynamicMethod.apply(this, [param1, param2]);** // in dynamic functions
-  - posibility to get **class definition** by:
-    - **this.self;** // without the need to know class name itself
-  - posibility to get **class name** by: 
-    - **this.self.Name;** // only if class is defined by Class.Define('ClassName', cfg);
-  - posibility to **create instance by**:
-    - classic Javascript **new keyword**:
-      var instance = new ClassName(param1, param2);
-    - class name string with **Class.Create(); method**:
-      var instance = Class.Create('ClassName', [param1, param2]);
-  - **inheritance checking** by javascript 'instanceof' keyword
+- possibility to call any dynamic and static parent method anywhere by:
+  - **this.parent(param1, param2);** // in static and dynamic functions
+  - **this.parent.anyStaticMethod(param1, param2);** // in static functions
+  - **this.parent.anyDynamicMethod(param1, param2);** // in dynamic functions
+  - **this.parent.apply(this, [param1, param2]);** // in static and dynamic functions
+  - **this.parent.anyStaticMethod.apply(this, [param1, param2]);** // in static functions
+  - **this.parent.anyDynamicMethod.apply(this, [param1, param2]);** // in dynamic functions
+- posibility to get **class definition** by:
+  - **this.self;** // without the need to know class name itself
+- posibility to get class name / fullname / namespace (only if class is defined by Class.Define();) by: 
+  - **this.self.Fullname;**
+  - **this.self.Name;**
+  - **this.self.Namespace;**
+- posibility to **create instance by**:
+  - classic Javascript **new keyword**:
+    var instance = new ClassName(param1, param2);
+  - class name string with **Class.Create(); method**:
+    var instance = Class.Create('ClassName', [param1, param2]);
+- **inheritance checking** by javascript 'instanceof' keyword
+- posibility to create anonymous classes like:
+  - **new Class({Constructor:function(text){console.log(text)}})("It works!");**
 
 ## **1. Basic Class - Animal**
 ```javascript
