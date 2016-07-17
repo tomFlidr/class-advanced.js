@@ -7,14 +7,14 @@ Javascript library to create prototyped classes.
 ```html
 <script type="text/javascript" src="https://tomflidr.github.io/class.js/src/class.min.js"></script>
 ```
-## DEMOS
+## **DEMOS**
 - [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
 - [2. Class Dog Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
 - [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
 - [4. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/04-class-a-b-c-and-parent-calls/index.html)
 - [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
 
-## Features
+## **Features**
 - very fast, effective, supersmall - all in 320 lines, **minimized: 5.3 KB**, **gzipped: 1.9 KB**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
@@ -47,7 +47,7 @@ Javascript library to create prototyped classes.
       var instance = Class.Create('ClassName', [param1, param2]);
   - **inheritance checking** by javascript 'instanceof' keyword
 
-## 1. Basic Class - Animal
+## **1. Basic Class - Animal**
 ```javascript
 // declare class with internal name 'Class'
 var Animal = Class({
@@ -76,7 +76,7 @@ dog.ShowYourself(); // 'Charlie - wrr haf!'
 console.log(dog.self.Name); // 'Class'
 console.log(dog.toString()); // '[object Animal]'
 ```
-## 2. Class Dog Extends Animal
+## **2. Class Dog Extends Animal**
 ```javascript
 Class.Define('Animal', {
 	Static: {
@@ -131,7 +131,7 @@ console.log(typeof Animals.Dog); // 'function'
 console.log(typeof dog); // 'object'
 ```
 
-## 3. Three Extended Classes With Static Members
+## **3. Three Extended Classes With Static Members**
 ```javascript
 Class.Define('Person', {
 	Static: {
@@ -196,7 +196,7 @@ console.log(secretary.GetInfo());
 console.log(prManager.GetInfo());
 ```
 
-## 4. Class A, B, C And Parent Methods Calls Flows
+## **4. Class A, B, C And Parent Methods Calls Flows**
 ```javascript
 var A = Class({
 	Static: {
@@ -343,7 +343,7 @@ var c = C.Create(1, 2, 3)
 console.log(c); // [object C]
 ```
 
-### 5. Syntax Customization
+### **5. Syntax Customization**
 ```javascript
 var $class = Class;
 $class.$define = Class.Define;
@@ -374,7 +374,7 @@ var MyClass = $class({
 // instance creating
 var myInstance = new MyClass(); // "It works!
 ```
-### Browser Usage
+### **Browser Usage**
 - install any browser if necessary (MSIE6+, Firefox, Google Chrome, Safari, Opera...)
 - create new empty text file with name "example.html":
 - open the file "example.html" in the browser to run
@@ -398,7 +398,7 @@ var myInstance = new MyClass(); // "It works!
 </html>
 
 ```
-### Node.js Usage
+### **Node.js Usage**
 - install node.js from nodejs.org if necessary
 - create new empty text file with name "example.js":
 - type into command line window "node example.js" to run
@@ -411,7 +411,7 @@ var MyClass = Class({
 });
 var myInstance = new MyClass(); // "It works!
 ```
-### Windows Script Host Usage
+### **Windows Script Host Usage**
 - create new empty text file with name "example.wsf":
 - doubleclick on the file "example.wsf" to run
 ```html
@@ -428,7 +428,7 @@ var myInstance = new MyClass(); // "It works!
 </job>
 ```
 
-## DEMOS
+## **DEMOS**
 - [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
 - [2. Class Dog Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
 - [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
