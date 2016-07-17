@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Syntax Customization</title>
+
+	</head>
+	<body onload="examplesOnLoadHandler()">
+
+		<h1>Syntax Customization</h1>
+
+		<table id="columns">
+			<thead>
+				<tr>
+					<th>Source code:</th>
+					<th>Console output:</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<pre class="language-javascript"><code id="code"></code></pre>
+					</td><td>
+						<div><div id="result"></div></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- examples common style and javascript code highlighter resources -->
+		<link href="../../resources/css/examples.css" rel="stylesheet" />
+		<script src="../../resources/js/browser-examples.js" type="text/javascript"></script>
+
+		<!-- CLASS LIBRARY -->
+		<script src="../../../src/class.min.js" type="text/javascript"></script>
+
+		<!-- EXAMPLE CODE -->
+		<script src="example.js" type="text/javascript"></script>
+
+	</body>
+</html>

@@ -54,9 +54,6 @@ Class = (function (_globalScope) {
 		'parent'			: 'parent'
 	};
 	$class._keywords = {};
-	for (var key in $class['Constants']) {
-		$class._keywords[$class['Constants'][key]] = true;
-	};
 	$class['ClassImprintBaseName'] = 'class{0}';
 	$class['InstanceImprintBaseName'] = 'instance{0}';
 	$class._classImprintCounter = 0;
@@ -66,6 +63,15 @@ Class = (function (_globalScope) {
 		{} // static methods parent calls actual level under classImprint key
 	];
 	$class._classParents = {};
+	$class['CustomizeSyntax'] = function (constants) {
+		var value = '';
+		for (var key in constants) {
+			value = constants[key];
+			$class._keywords[value] = true;
+			$class['Constants'][key] = value;
+		};
+	};
+	$class['CustomizeSyntax']($class['Constants']);
 	$class['Create'] = function (fullName, args) {
 		var _explodedName = fullName.split('.'),
 			_namePart = '',
@@ -100,7 +106,7 @@ Class = (function (_globalScope) {
 		}
 		if (cfg.toString === {}.toString) {
 			cfg['toString'] = function () {
-				return '[object ' + this['self']['Name'] + ']';
+				return '[object ' + this[_constants['self']][_constants['Name']] + ']';
 			}
 		}
 		_result = $class._defineClass(cfg, _name);
@@ -189,7 +195,6 @@ Class = (function (_globalScope) {
 			_cfgExtend = cfg[_constants['Extend']];
 		var Prototype = function () { },
 			_currentProto;
-
 		if (_cfgExtend) {
 			/*if (Object['create']) {
 				classDefinition[_prototype] = Object['create'](_cfgExtend[_prototype]);
@@ -198,7 +203,6 @@ Class = (function (_globalScope) {
 				classDefinition[_prototype] = new Prototype();
 			//}
 		}
-
 		_currentProto = classDefinition[_prototype];
 		for (_dynamicName in _currentProto) {
 			if (typeof (_currentProto[_dynamicName][_nameStr]) != 'string')
