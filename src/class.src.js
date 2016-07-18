@@ -1,8 +1,8 @@
-/**
+﻿/**
  * Javascript Class Helper
  * @author Tom Flidr | tomflidr(at)gmail(dot)com
- * @version 1.1
- * @date 2016-07-15
+ * @version 1.2
+ * @date 2016-07-18
  * @usage
 
 var ClassName = Class({
@@ -214,7 +214,10 @@ Class = (function (_globalScope) {
 		}
 		_currentProto = classDefinition[_prototype];
 		for (_dynamicName in _currentProto) {
-			if (typeof (_currentProto[_dynamicName][_nameStr]) != 'string')
+			if (
+				typeof(_currentProto[_dynamicName]) == 'function' && 
+				typeof(_currentProto[_dynamicName][_nameStr]) != 'string'
+			)
 				_currentProto[_dynamicName][_nameStr] = _dynamicName;
 		}
 	};
@@ -227,7 +230,8 @@ Class = (function (_globalScope) {
 			for (_staticName in _cfgExtend) {
 				if (!($class._keywords[_staticName] === true)) {
 					classDefinition[_staticName] = _cfgExtend[_staticName];
-					classDefinition[_staticName][_nameStr] = _staticName;
+					if (typeof(_cfgExtend[_staticName]) == 'function') 
+						classDefinition[_staticName][_nameStr] = _staticName;
 				}
 			}
 		}
@@ -241,7 +245,8 @@ Class = (function (_globalScope) {
 		for (_dynamicName in cfg) {
 			if (!($class._keywords[_dynamicName] === true)) {
 				_classPrototype[_dynamicName] = cfg[_dynamicName];
-				_classPrototype[_dynamicName][_nameStr] = _dynamicName;
+				if (typeof(cfg[_dynamicName]) == 'function') 
+					_classPrototype[_dynamicName][_nameStr] = _dynamicName;
 			}
 		}
 		if (cfg[_constructor]) {
@@ -259,7 +264,8 @@ Class = (function (_globalScope) {
 			for (_staticName in _cfgStatic) {
 				if (!($class._keywords[_staticName] === true)) {
 					classDefinition[_staticName] = _cfgStatic[_staticName];
-					classDefinition[_staticName][_nameStr] = _staticName;
+					if (typeof(_cfgStatic[_staticName]) == 'function') 
+						classDefinition[_staticName][_nameStr] = _staticName;
 				}
 			}
 		}
