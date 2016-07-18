@@ -15,7 +15,7 @@
 - [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
 
 ## **Features**
-- very fast, effective, supersmall - all in 320 lines, **minimized: 5.6 KB**, **gzipped: 2.0 KB**
+- very fast, effective, supersmall - all in 350 lines, **minimized: 5.6 KB**, **gzipped: 2.0 KB**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
   - **Node.js**
