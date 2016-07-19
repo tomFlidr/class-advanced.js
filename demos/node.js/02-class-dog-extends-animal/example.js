@@ -1,4 +1,4 @@
-require('../../../src/class.min.js');
+require('../../../builds/latest/class.min.js');
 
 Class.Define('Animal', {
 	Static: {

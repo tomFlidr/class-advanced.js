@@ -1,4 +1,4 @@
-require('../../../src/class.min.js');
+require('../../../builds/latest/class.min.js');
 
 var A = Class({
 	Static: {

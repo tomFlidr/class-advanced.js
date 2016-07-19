@@ -1,4 +1,4 @@
-require('../../../src/class.min.js');
+require('../../../builds/latest/class.min.js');
 
 // declare class with internal name 'Class'
 var Animal = Class({

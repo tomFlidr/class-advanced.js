@@ -1,5 +1,5 @@
 <job>
-	<script type="JScript" src="../../../src/class.min.js"></script>
+	<script type="JScript" src="../../../builds/latest/class.min.js"></script>
 	<script type="JScript" src="../../resources/js/wsh-examples.js"></script>
 	<script type="JScript" src="example.js"></script>
 	<script type="JScript">
