@@ -1,8 +1,8 @@
 ﻿/**
  * Javascript Class Helper
  * @author Tom Flidr | tomflidr(at)gmail(dot)com
- * @version 1.2
- * @date 2016-07-18
+ * @version 1.3
+ * @date 2016-07-19
  * @usage
 
 var ClassName = Class({
@@ -89,7 +89,7 @@ Class = (function (_globalScope) {
 			if (!(_namePart in _currentScope)) {
 				throw new Error("Class '" + fullName + "' doesn't exist!");
 			}
-			_currentScope = _currentScope[_namePart];
+			_currentScope = _currentScope[_namePart] || {};
 		}
 		args.unshift(_currentScope);
 		return new (_currentScope.bind.apply(_currentScope, args))();
@@ -109,7 +109,7 @@ Class = (function (_globalScope) {
 			if (!(_namePart in _currentScope)) {
 				_currentScope[_namePart] = {};
 			}
-			_currentScope = _currentScope[_namePart];
+			_currentScope = _currentScope[_namePart] || {};
 		}
 		if (cfg.toString === {}.toString) {
 			cfg['toString'] = function () {
@@ -171,11 +171,7 @@ Class = (function (_globalScope) {
 			_constructorStr = _constants['Constructor'],
 			_instanceImprint = '';
 		if (_context === _globalScope) {
-			if (typeof (_cfg[_constructorStr]) == 'function') {
-				_cfg[_constructorStr].apply(_context, _args);
-			} else {
-				throw new Error("Class definition is not possible to call as function, it's necessary to create instance with 'new' keyword before class definition.");
-			}
+			$class._callConstructorNonInstance(_cfg, _context, _args, _constructorStr);
 		} else {
 			// fingerprint for dynamic parent calls
 			_instanceImprint = $class._completeInstanceImprint();
@@ -183,7 +179,18 @@ Class = (function (_globalScope) {
 			// define parent calls helper in dynamic methods in later binding here after instance is created - to work with 'this' context properly
 			$class._declareParentDynamicCalls(_context);
 			// call defined constructor
-			return _context[_constructorStr].apply(_context, _args);
+			if (typeof(_context[_constructorStr]) == 'function') {
+				return _context[_constructorStr].apply(_context, _args);
+			} else {
+				return _context;
+			}
+		}
+	};
+	$class._callConstructorNonInstance = function (_cfg, _context, _args, _constructorStr) {
+		if (typeof (_cfg[_constructorStr]) == 'function') {
+			_cfg[_constructorStr].apply(_context, _args);
+		} else {
+			throw new Error("Class definition is not possible to call as function, it's necessary to create instance with 'new' keyword before class definition.");
 		}
 	};
 	$class._completeClassImprint = function () {
