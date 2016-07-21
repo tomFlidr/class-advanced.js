@@ -15,7 +15,7 @@
 - [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
 
 ## **Features**
-- very fast, effective, supersmall - all in 350 lines, **minimized: 5.6 KB**, **gzipped: 2.0 KB**
+- very fast, effective, supersmall - all in 350 lines, **minimized: 6.6 KB**, **gzipped: 2.4 KB**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
   - **Node.js**
@@ -36,8 +36,10 @@
   - **this.parent.apply(this, [param1, param2]);** // in static and dynamic functions
   - **this.parent.anyStaticMethod.apply(this, [param1, param2]);** // in static functions
   - **this.parent.anyDynamicMethod.apply(this, [param1, param2]);** // in dynamic functions
-- posibility to get **class definition** by:
+- posibility to get **current class definition** by:
   - **this.self;** // without the need to know class name itself
+  - this.self context (static class definition) is changed in each defined dyamic and static method
+    into value coresponded with original definition place
 - posibility to get class name / fullname / namespace (only if class is defined by Class.Define();) by: 
   - **this.self.Fullname;**
   - **this.self.Name;**

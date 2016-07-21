@@ -43,7 +43,7 @@
 
 @cd bin
 @for %%f in (comment.js result.js) do @(
-	@type "%%f" >> ../!resultFile!
+	type "%%f" >> ../!resultFile!
 )
 @cd ..
 

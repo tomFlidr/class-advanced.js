@@ -5,6 +5,7 @@ $class.$create = Class.Create;
 $class.CustomizeSyntax({
 	ClassImprint	: '$classId',
 	InstanceImprint	: '$instanceId',
+    Inherited		: '$inherited',
 	Extend			: '$extends',
 	Static			: '$static',
 	Constructor		: '$constructor',
