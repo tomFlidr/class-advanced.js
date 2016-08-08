@@ -52,7 +52,7 @@ Class = (function (_globalScope) {
 	$class['Constants'] = {
 		'ClassImprint'		: '$classImprint',
 		'InstanceImprint'	: '$instanceImprint',
-        'Inherited'        	: '$inherited',
+		'Inherited'			: '$inherited',
 		'Extend'			: 'Extend',
 		'Static'			: 'Static',
 		'Constructor'		: 'Constructor',
@@ -81,29 +81,29 @@ Class = (function (_globalScope) {
 		};
 	};
 	$class['CustomizeSyntax']($class['Constants']);
-    $class['Create'] = function (fullName, args, throwError) {
-        var classDefinition = $class['GetByName'](fullName, throwError);
+	$class['Create'] = function (fullName, args, throwError) {
+		var classDefinition = $class['GetByName'](fullName, throwError);
 		args = args || [];
 		args.unshift(classDefinition);
 		return new (classDefinition.bind.apply(classDefinition, args))();
 	};
 	$class['Define'] = function (fullName, cfg) {
 		return $class._defineNamedClass(fullName, cfg || {});
-    };
-    $class['GetByName'] = function (fullName, throwError) {
-        throwError = !!throwError;
-        var _explodedName = fullName.split('.'),
-            _namePart = '',
-            _currentScope = _globalScope;
-        for (var i = 0, l = _explodedName.length; i < l; i += 1) {
-            _namePart = _explodedName[i];
-            if (!(_namePart in _currentScope) && throwError) {
-                throw new Error("Class '" + fullName + "' doesn't exist!");
-            }
-            _currentScope = _currentScope[_namePart]; // invoke Proxy autoloading
-        }
-        return _currentScope;
-    };
+	};
+	$class['GetByName'] = function (fullName, throwError) {
+		throwError = !!throwError;
+		var _explodedName = fullName.split('.'),
+			_namePart = '',
+			_currentScope = _globalScope;
+		for (var i = 0, l = _explodedName.length; i < l; i += 1) {
+			_namePart = _explodedName[i];
+			if (!(_namePart in _currentScope) && throwError) {
+				throw new Error("Class '" + fullName + "' doesn't exist!");
+			}
+			_currentScope = _currentScope[_namePart]; // invoke Proxy autoloading
+		}
+		return _currentScope;
+	};
 	$class._defineNamedClass = function (fullName, cfg) {
 		var _explodedName = fullName.split('.'),
 			_name = _explodedName.pop(),
@@ -211,109 +211,109 @@ Class = (function (_globalScope) {
 		return _result;
 	};
 	$class._extendParentPrototype = function (_classDefinition, cfg, _parentClassImprint) {
-        var Prototype = function () { },
-            _prototype = 'prototype',
-            _cfgExtend = cfg[$class['Constants']['Extend']],
-            _cfgExtendProto;
-        if (_cfgExtend) {
-            _cfgExtendProto = _cfgExtend[_prototype];
+		var Prototype = function () { },
+			_prototype = 'prototype',
+			_cfgExtend = cfg[$class['Constants']['Extend']],
+			_cfgExtendProto;
+		if (_cfgExtend) {
+			_cfgExtendProto = _cfgExtend[_prototype];
 			/*if (Object['create']) {
 				classDefinition[_prototype] = Object['create'](_cfgExtendProto);
 			} else {*/
 				if (_cfgExtend) Prototype[_prototype] = _cfgExtendProto;
 				_classDefinition[_prototype] = new Prototype();
 			//}
-            $class._extendParentProtoSetUpNonDeclaredProxyCalls(_classDefinition[_prototype], _cfgExtendProto, cfg, _parentClassImprint, 0);
+			$class._extendParentProtoSetUpNonDeclaredProxyCalls(_classDefinition[_prototype], _cfgExtendProto, cfg, _parentClassImprint, 0);
 		}
-        $class._extendParentProtoSetUpFunctionNames(_classDefinition[_prototype]);
-    };
-    $class._extendParentProtoSetUpNonDeclaredProxyCalls = function (_classDefinitionProto, _cfgExtendProto, cfg, _parentClassImprint, _staticCalls) {
-        for (var _dynamicName in _cfgExtendProto) {
-            // if there is any dynamic function in parent class declared but not declared in current class definition config:
-            if (
-                    !($class._keywords[_dynamicName] === true) && // if dynamic element name is not class keyword
-                    typeof (_cfgExtendProto[_dynamicName]) == 'function' && // if dynamic element in parent class definition is a function
-                    !(_dynamicName in cfg)// if dynamic name is not declared in current class definition config
-            ) {
-                if (_dynamicName.substr(0, 1) == '_') {
-                    // if dynamic element is private - keep the function there
-                    // because it will be necessary to have this function there for calls by this context in original parent function
-                    _classDefinitionProto[_dynamicName] = $class._extendParentProtoGetPrivateProxyCall(
-                        _dynamicName, _cfgExtendProto[_dynamicName], _parentClassImprint, _staticCalls
-                    );
+		$class._extendParentProtoSetUpFunctionNames(_classDefinition[_prototype]);
+	};
+	$class._extendParentProtoSetUpNonDeclaredProxyCalls = function (_classDefinitionProto, _cfgExtendProto, cfg, _parentClassImprint, _staticCalls) {
+		for (var _dynamicName in _cfgExtendProto) {
+			// if there is any dynamic function in parent class declared but not declared in current class definition config:
+			if (
+					!($class._keywords[_dynamicName] === true) && // if dynamic element name is not class keyword
+					typeof (_cfgExtendProto[_dynamicName]) == 'function' && // if dynamic element in parent class definition is a function
+					!(_dynamicName in cfg)// if dynamic name is not declared in current class definition config
+			) {
+				if (_dynamicName.substr(0, 1) == '_') {
+					// if dynamic element is private - keep the function there
+					// because it will be necessary to have this function there for calls by this context in original parent function
+					_classDefinitionProto[_dynamicName] = $class._extendParentProtoGetPrivateProxyCall(
+						_dynamicName, _cfgExtendProto[_dynamicName], _parentClassImprint, _staticCalls
+					);
 
-                } else {
-                    // if dynamic element is protected or public - create proxy with this.self context change
-                    // be careful because sometimes there could not be possible to get this.self.Extend - because we are already in parents
-                    // vytvoř proxy funkci, která změní this.self kontext
-                    _classDefinitionProto[_dynamicName] = $class._extendParentProtoGetProtectedPublicProxyCall(
-                        _dynamicName, _cfgExtendProto[_dynamicName], _staticCalls
-                    );
-                }  
-            }
-        }
-    };
-    $class._extendParentProtoGetProtectedPublicProxyCall = function (_dynamicName, _targetFn, _staticCalls) {
-        var _constants = $class['Constants'],
-            _selfStr = _constants['self'],
-            _extendStr = _constants['Extend'];
-        return function () {
-            var _currentSelf = this[_selfStr], 
-                _result;
-            if (_extendStr in this.self) {
-                // sometimes, there shouldn't be presented Extend property - because we should be already in parent level
-                // lets say - there are three classes - A, B extended from A and C as foreign class - no inheritance from A or B:
-                // if you call in instance B public dynamic method not presented in B, but originally declared in A class,
-                // and in A class method is called some method in C class and in C class there is called some other extended public instance method on B instance,
-                // there is already changed this.self to very extended level - so it shouldn't be possible to get it - so be carefull
-                this[_selfStr] = _currentSelf[_extendStr];
-            }
-            _result = _targetFn.apply(_staticCalls ? this[_selfStr] : this, [].slice.apply(arguments));
-            this[_selfStr] = _currentSelf;
-            return _result;
-        }
-    }
-    $class._extendParentProtoGetPrivateProxyCall = function (_dynamicName, _targetFn, _parentClassImprint, _staticCalls) {
-        var _constants = $class['Constants'],
-            _inherited = _constants['Inherited'],
-            _targetImprint = '';
-        if (_targetFn[_inherited]) {
-            _targetImprint = _targetFn[_inherited][0];
-            _targetFn = _targetFn[_inherited][1];
-        } else {
-            _targetImprint = _parentClassImprint;
-            _targetFn = _targetFn;
-        }
-        var _proxyFn = $class._extendParentProtoGetPrivateProxyCallProvider(_dynamicName, _targetFn, _targetImprint, _staticCalls);
-        _proxyFn[_inherited] = [_targetImprint, _targetFn];
-        return _proxyFn;
-    };
-    $class._extendParentProtoGetPrivateProxyCallProvider = function (_dynamicName, _targetFn, _targetImprint, _staticCalls) {
-        var _constants = $class['Constants'];
-            _selfStr = _constants['self'],
-            _classImprint = _constants['ClassImprint'],
-            _fullname = _constants['Fullname'];
-        return function () {
-            var _self = this[_selfStr];
-            if (_self[_classImprint]() != _targetImprint) {
-                throw new Error(
-                    "Private method call: '"+_dynamicName+"' not allowed from class context: '"+_self[_fullname]+"'."
+				} else {
+					// if dynamic element is protected or public - create proxy with this.self context change
+					// be careful because sometimes there could not be possible to get this.self.Extend - because we are already in parents
+					// vytvoř proxy funkci, která změní this.self kontext
+					_classDefinitionProto[_dynamicName] = $class._extendParentProtoGetProtectedPublicProxyCall(
+						_dynamicName, _cfgExtendProto[_dynamicName], _staticCalls
+					);
+				}  
+			}
+		}
+	};
+	$class._extendParentProtoGetProtectedPublicProxyCall = function (_dynamicName, _targetFn, _staticCalls) {
+		var _constants = $class['Constants'],
+			_selfStr = _constants['self'],
+			_extendStr = _constants['Extend'];
+		return function () {
+			var _currentSelf = this[_selfStr], 
+				_result;
+			if (_extendStr in this.self) {
+				// sometimes, there shouldn't be presented Extend property - because we should be already in parent level
+				// lets say - there are three classes - A, B extended from A and C as foreign class - no inheritance from A or B:
+				// if you call in instance B public dynamic method not presented in B, but originally declared in A class,
+				// and in A class method is called some method in C class and in C class there is called some other extended public instance method on B instance,
+				// there is already changed this.self to very extended level - so it shouldn't be possible to get it - so be carefull
+				this[_selfStr] = _currentSelf[_extendStr];
+			}
+			_result = _targetFn.apply(_staticCalls ? this[_selfStr] : this, [].slice.apply(arguments));
+			this[_selfStr] = _currentSelf;
+			return _result;
+		}
+	}
+	$class._extendParentProtoGetPrivateProxyCall = function (_dynamicName, _targetFn, _parentClassImprint, _staticCalls) {
+		var _constants = $class['Constants'],
+			_inherited = _constants['Inherited'],
+			_targetImprint = '';
+		if (_targetFn[_inherited]) {
+			_targetImprint = _targetFn[_inherited][0];
+			_targetFn = _targetFn[_inherited][1];
+		} else {
+			_targetImprint = _parentClassImprint;
+			_targetFn = _targetFn;
+		}
+		var _proxyFn = $class._extendParentProtoGetPrivateProxyCallProvider(_dynamicName, _targetFn, _targetImprint, _staticCalls);
+		_proxyFn[_inherited] = [_targetImprint, _targetFn];
+		return _proxyFn;
+	};
+	$class._extendParentProtoGetPrivateProxyCallProvider = function (_dynamicName, _targetFn, _targetImprint, _staticCalls) {
+		var _constants = $class['Constants'];
+			_selfStr = _constants['self'],
+			_classImprint = _constants['ClassImprint'],
+			_fullname = _constants['Fullname'];
+		return function () {
+			var _self = this[_selfStr];
+			if (_self[_classImprint]() != _targetImprint) {
+				throw new Error(
+					"Private method call: '"+_dynamicName+"' not allowed from class context: '"+_self[_fullname]+"'."
 				);
-            }
-            return _targetFn.apply(_staticCalls ? _self : this, [].slice.apply(arguments));
-        }
-    }
-    $class._extendParentProtoSetUpFunctionNames = function (_currentProto) {
-        var _constants = $class['Constants'],
-            _nameStr = _constants['Name'];
-        for (var _dynamicName in _currentProto) {
-            if (!($class._keywords[_dynamicName] === true) && typeof(_currentProto[_dynamicName]) == 'function') {
-                if (typeof(_currentProto[_dynamicName][_nameStr]) != 'string') {
-                    _currentProto[_dynamicName][_nameStr] = _dynamicName;
-                }
-            }
-        }
-    }
+			}
+			return _targetFn.apply(_staticCalls ? _self : this, [].slice.apply(arguments));
+		}
+	}
+	$class._extendParentProtoSetUpFunctionNames = function (_currentProto) {
+		var _constants = $class['Constants'],
+			_nameStr = _constants['Name'];
+		for (var _dynamicName in _currentProto) {
+			if (!($class._keywords[_dynamicName] === true) && typeof(_currentProto[_dynamicName]) == 'function') {
+				if (typeof(_currentProto[_dynamicName][_nameStr]) != 'string') {
+					_currentProto[_dynamicName][_nameStr] = _dynamicName;
+				}
+			}
+		}
+	}
 	$class._extendParentStatic = function (classDefinition, cfg, _parentClassImprint) {
 		var _staticName = '',
 			_constants = $class['Constants'],
@@ -321,10 +321,10 @@ Class = (function (_globalScope) {
 			_cfgExtend = cfg[_constants['Extend']];
 		if (_cfgExtend) {
 			for (_staticName in _cfgExtend) {
-                if (
-                    !($class._keywords[_staticName] === true) && // do not extend class keyword elements
-                    _staticName.substr(0, 1) != '_' // do not extend private elements
-                ) {
+				if (
+					!($class._keywords[_staticName] === true) && // do not extend class keyword elements
+					_staticName.substr(0, 1) != '_' // do not extend private elements
+				) {
 					classDefinition[_staticName] = _cfgExtend[_staticName];
 					if (typeof(_cfgExtend[_staticName]) == 'function') 
 						classDefinition[_staticName][_nameStr] = _staticName;
@@ -338,17 +338,17 @@ Class = (function (_globalScope) {
 			_constants = $class['Constants'],
 			_nameStr = _constants['Name'],
 			_constructor = _constants['Constructor'],
-            _dynamicName = '';
-        
-        var _cfgExtend = cfg[_constants['Extend']];
-        var _parentPrototype = _cfgExtend ? _cfgExtend['prototype'] : {};
+			_dynamicName = '';
+		
+		var _cfgExtend = cfg[_constants['Extend']];
+		var _parentPrototype = _cfgExtend ? _cfgExtend['prototype'] : {};
 
 		for (_dynamicName in cfg) {
-            if (!($class._keywords[_dynamicName] === true)) {
-                _classPrototype[_dynamicName] = cfg[_dynamicName];
+			if (!($class._keywords[_dynamicName] === true)) {
+				_classPrototype[_dynamicName] = cfg[_dynamicName];
 				if (typeof(cfg[_dynamicName]) == 'function') {
-                    _classPrototype[_dynamicName][_nameStr] = _dynamicName;
-                }
+					_classPrototype[_dynamicName][_nameStr] = _dynamicName;
+				}
 			}
 		}
 		if (cfg[_constructor]) {
@@ -446,11 +446,11 @@ Class = (function (_globalScope) {
 			throw "No parent method named: '" + _methodName + "'.";
 		} else if (_parentMethodType != 'function') {
 			throw "Parent method '" + _methodName + "' is not a function.";
-        };
-        _context[_selfStr] = _parentClassDefinition; // set up parent class definition into this.self
+		};
+		_context[_selfStr] = _parentClassDefinition; // set up parent class definition into this.self
 		_result = _parentMethod.apply(_imprintsIndex ? _context[_selfStr] : _context, _args);
-        delete $class._actualLevels[_imprintsIndex][_instanceImprintValue];
-        _context[_selfStr] = _contextClassDefinition; // set up back current class definition into this.self
+		delete $class._actualLevels[_imprintsIndex][_instanceImprintValue];
+		_context[_selfStr] = _contextClassDefinition; // set up back current class definition into this.self
 		return _result;
 	};
 	$class._getParentClassImprint = function (_contextClassImprint, _instanceImprint, _imprintsIndex) {
