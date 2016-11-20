@@ -18,10 +18,6 @@
 <script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.0.0/class.dev.js"></script>
 ```
 
-```shell
-composer require tomflidr/class.js
-```
-
 ## **DEMOS**
 - [**1. Basic Class - Animal**](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
 - [**2. Class Dog And Cat Extends Animal**](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)
