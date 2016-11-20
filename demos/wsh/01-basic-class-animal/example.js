@@ -21,6 +21,8 @@ var Animal = Class({
 var dog = new Animal('Charlie', 'Wrr haf!');
 
 // 'Wrr haf!'
+dog.MakeNoise();
+
 // 'People call me 'Charlie'.'
 dog.IntroduceYourself();
 
