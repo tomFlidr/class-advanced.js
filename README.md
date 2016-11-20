@@ -5,11 +5,23 @@
 
  Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection and much more. For all browsers, Node.js and Windows Script Host.
 
-* [**class.min.js download**](https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js)
+## **DOWNLOAD**
+ 
+* [**download class.min.js (for production)**](https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js)
+* [**download class.dev.js (for development with JSDocs comments for IDE)**](https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js)
 
 ```html
+<!-- for production: -->
 <script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js"></script>
+
+<!-- for development with JSDocs comments for IDE: -->
+<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.0.0/class.dev.js"></script>
 ```
+
+```shell
+composer require tomflidr/class.js
+```
+
 ## **DEMOS**
 - [**1. Basic Class - Animal**](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
 - [**2. Class Dog And Cat Extends Animal**](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)

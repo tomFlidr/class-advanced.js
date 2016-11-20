@@ -40,19 +40,10 @@
 		"name": "Tom Flidr",
 		"web": "https://github.com/tomFlidr/"
 	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/tomFlidr/class.js.git"
-	},
-	"filename": "class.min.js",
-	"autoupdate": {
-		"source": "git",
-		"target": "git://github.com/tomFlidr/class.js.git",
-		"basePath": "src",
-		"files": [
-			"class.min.js",
-			"class.dev.js",
-			"class.src.js"
-		]
+	"minimum-stability": "2.0.0",
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.0.0"
+		}
 	}
 }
