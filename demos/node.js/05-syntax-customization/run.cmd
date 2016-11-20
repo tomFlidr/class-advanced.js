@@ -1,2 +1,0 @@
-@node example.js
-pause

@@ -31,19 +31,19 @@
 @echo !initialJsComment!>bin/comment.js
 
 :: compile source with google closure compiller in advanced mode and save it in temporary file result.js
-@java -jar bin/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --env BROWSER --formatting PRETTY_PRINT --js %sourceFile% --hide_warnings_for %sourceFile% --js_output_file bin/result.js --output_wrapper "var %%output%%"
+::@java -jar bin/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --env BROWSER --formatting PRETTY_PRINT --js %sourceFile% --hide_warnings_for %sourceFile% --js_output_file bin/result.js --output_wrapper "var %%output%%"
+@java -jar bin/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS --env BROWSER --js %sourceFile% --hide_warnings_for %sourceFile% --js_output_file bin/result.js --output_wrapper "var %%output%%"
 
 :: remove all new line chars in minimized temporary file result.js
-@cd bin
+::@cd bin
 ::@call jrepl "\n" "" /M /F result.js /O -
-@cd ..
+::@cd ..
 
 :: delete previous result file and complete initial comment with new minimized result into result file
-@if exist "!resultFile!" del "!resultFile!"
-
 @cd bin
+@if exist "../!resultFile!" del "../!resultFile!"
 @for %%f in (comment.js result.js) do @(
-	type "%%f" >> ../!resultFile!
+	type "%%f" >> "../!resultFile!"
 )
 @cd ..
 

@@ -2,20 +2,21 @@
 
  Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection and much more. For all browsers, Node.js and Windows Script Host.
 
-* [class.min.js download](https://tomflidr.github.io/class.js/builds/1.4.0/class.min.js)
+* [class.min.js download](https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js)
 
 ```html
-<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/1.4.0/class.min.js"></script>
+<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js"></script>
 ```
 ## **DEMOS**
 - [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
-- [2. Class Dog Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
+- [2. Class Dog And Cat Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)
 - [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
-- [4. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/04-class-a-b-c-and-parent-calls/index.html)
-- [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
+- [4. Three Controller Classes And Different Behaviour In Actions](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
+- [5. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/05-class-a-b-c-and-parent-calls/index.html)
+- [6. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/06-syntax-customization/index.html)
 
 ## **Features**
-- very fast, effective, supersmall - all in 440 lines, **minimized: 6.6 KB**, **gzipped: 2.4 KB**
+- very fast, effective, supersmall - all in **6.8 KB - minimized**, **2.6 KB - gzipped**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
   - **Node.js**
@@ -23,6 +24,7 @@
   - Adobe (only old archived version 0.6)
 - **syntax customization** - any declaration keyword or internal class keyword shoud be customized
 - inspired by PHP OOP, Ext.JS and Prototype.JS syntax
+- documented with JSDocs comments
 - **Function.prototype.bind polyfill included**
 - possibility to define:
   - **Static** elements
@@ -30,6 +32,7 @@
   - **Constructor** method
   - all **other elements as dynamic** elements
 - possibility to call any dynamic and static parent method anywhere by:
+  - **this.parent(arguments);** // in static and dynamic functions
   - **this.parent(param1, param2);** // in static and dynamic functions
   - **this.parent.anyStaticMethod(param1, param2);** // in static functions
   - **this.parent.anyDynamicMethod(param1, param2);** // in dynamic functions
@@ -38,56 +41,62 @@
   - **this.parent.anyDynamicMethod.apply(this, [param1, param2]);** // in dynamic functions
 - posibility to get **current class definition** by:
   - **this.self;** // without the need to know class name itself
-  - this.self context (static class definition) is changed in each defined dyamic and static method
+  - **this.static;** // without the need to know class name itself
+  - this.self context (static class definition) is changed in each defined dynamic and static method
     into value coresponded with original definition place
+  - this.static context (static class definition) is not changed and it's all time coresponds to
+    static class context from instance context - like later spatic binding in PHP OOP
 - posibility to get class name / fullname / namespace (only if class is defined by Class.Define();) by: 
-  - **this.self.Fullname;**
-  - **this.self.Name;**
-  - **this.self.Namespace;**
+  - **this.self.Fullname;** or **this.static.Fullname;**
+  - **this.self.Name;** or **this.static.Name;**
+  - **this.self.Namespace;** or **this.static.Namespace;**
 - posibility to **create instance by**:
   - classic Javascript **new keyword**:
     var instance = new ClassName(param1, param2);
   - class name string with **Class.Create(); method**:
-    var instance = Class.Create('ClassName', [param1, param2]);
+    var instance = Class.Create('ClassName', param1, param2);
 - **inheritance checking** by javascript 'instanceof' keyword
 - posibility to create anonymous classes like:
   - **new Class({Constructor:function(text){console.log(text)}})("It works!");**
 
 ## **1. Basic Class - Animal**
 ```javascript
-// declare class with internal name 'Class'
+// Declare not named class by Class(...) 
+// call into custom variable 'Animal':
 var Animal = Class({
-	Static: {
-		Create: function (name, sound) {
-			return new this.self(name, sound);
-		}
-	},
 	Constructor: function (name, sound) {
 		this.name = name;
 		this.sound = sound;
 	},
 	name: '',
 	sound: '',
-	ShowYourself: function () {
-		console.log(this.name + " - " + this.sound);
+	MakeNoise: function () {
+		console.log(this.sound);
 	},
-	toString: function () {
-		return "[object Animal]";
+	IntroduceYourself: function () {
+		console.log(
+			"People call me '{0}'.".format(this.name)
+		);
 	}
 });
-// use
-var dog = Animal.Create("Charlie", "wrr haf!");
-dog.ShowYourself(); // 'Charlie - wrr haf!'
 
-console.log(dog.self.Name); // 'Class'
-console.log(dog.toString()); // '[object Animal]'
+// Create instance:
+var dog = new Animal('Charlie', 'Wrr haf!');
+
+// 'Wrr haf!'
+// 'People call me 'Charlie'.'
+dog.IntroduceYourself();
 ```
-## **2. Class Dog Extends Animal**
+## **2. Class Dog And Cat Extends Animal**
 ```javascript
+// Declare named class by Class.Define(...) 
+// call into global memory space as 'Animal'
 Class.Define('Animal', {
 	Static: {
-		Create: function (name, sound) {
-			return new this.self(name, sound);
+		GetInstance: function () {
+			// this.static contains a child class definition
+			// as later static binding in PHP normaly works
+			return new this.static(arguments);
 		}
 	},
 	Constructor: function (name, sound) {
@@ -96,45 +105,112 @@ Class.Define('Animal', {
 	},
 	name: '',
 	sound: '',
-	ShowYourself: function () {
-		console.log(this.name + " - " + this.sound);
+	MakeNoise: function () {
+		console.log(this.sound);
+	},
+	IntroduceYourself: function () {
+		console.log(
+			"People call me '{0}'.".format(this.name)
+		);
+	},
+	DefineYourself: function (asdf) {
+		console.log(
+			"Globaly, I'm an '{0}'.".format(this.self.Name)
+			+ '<br />' +
+			"More precisely, I'm a '{0}'.".format(this.static.Name)
+			+ '<br />' +
+			"I live like an '{0}'.".format(this.static.Namespace)
+			+ '<br />' +
+			"My namespace is '{0}'.".format(this.static.Fullname)
+		);
 	}
 });
 
-Class.Define('Animals.Dog', {
+// Declare named classes by Class.Define(...) call 
+// into global memory space as 'Animal.Dog' and 'Animal.Cat'
+// as extended classes from 'Animal' class.
+Class.Define('Animal.Dog', {
 	Extend: Animal,
-	Static: {
-		Create: function (name, sound) {
-			return new this.self(name, sound);
-		}
-	},
-	Constructor: function (name, sound) {
-		this.parent(name, sound);
-	},
-	type: 'dog',
-	ShowYourself: function () {
-		this.parent();
-		console.log(this.type);
+	TellYourStory: function () {
+		this.MakeNoise();
+		this.IntroduceYourself();
+		this.DefineYourself();
+		console.log("But I'm the best friend of human.")
+	}
+});
+Class.Define('Animal.Cat', {
+	Extend: Animal,
+	TellYourStory: function () {
+		this.MakeNoise();
+		this.IntroduceYourself();
+		this.DefineYourself();
+		console.log(
+			"I don't care about people, but sometimes <br />"+
+			"they have something very good to eat."
+		);
 	}
 });
 
-var dog = new Animals.Dog('Charlie', 'wrr haf!');
-dog.ShowYourself(); // 'Charlie - wrr haf!, dog'
+// Create instances (both ways are doing the same):
+var dog = new Animal.Dog("Charlie", "Wrr haf!");
+var cat = Animal.Cat.GetInstance('Suzy', 'Pchchchchch!');
+
+// 'Wrr haf!'
+// People call me 'Charlie'.
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Dog'.
+// I live between 'Animal'.
+// My type is 'Animal.Dog'.
+
+// But the best friend of human.
+dog.TellYourStory();
+
+
+console.log("-------------------");
+
+
+// Pchchchchch! [String]
+// People call me 'Suzy'. [String]
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Cat'.
+// I live between 'Animal'.
+// My type is 'Animal.Cat'. [String]
+
+// I don't care about people, but sometimes 
+// they have something very good to eat.
+cat.TellYourStory();
+
+
+console.log("-------------------");
 
 console.log(dog instanceof Animal); // true
-console.log(dog instanceof Animals.Dog); // true
+console.log(dog instanceof Animal.Dog); // true
+console.log(dog instanceof Animal.Cat); // false
 console.log(dog instanceof Date); // false
 
-console.log(dog.self.Name); // 'Dog'
-console.log(dog.self.Extend.Name); // 'Animal'
+console.log("-------------------");
 
-console.log(dog.self === Animals.Dog); // true
-console.log(dog.self.Extend === Animal); // true
-console.log(dog.self.prototype == Animals.Dog.prototype); // true
-console.log(dog.self.Extend.prototype == Animal.prototype); // true
+console.log(dog.static.Name); // 'Dog'
+console.log(dog.static.Fullname); // 'Animal.Dog'
+console.log(dog.static.Namespace); // 'Animal'
+console.log(dog.static.Extend.Name); // 'Animal'
+console.log(dog.static.Extend.Fullname); // 'Animal'
+console.log(dog.static.Extend.Namespace); // ''
 
-console.log(typeof Animals.Dog); // 'function'
+console.log("-------------------");
+
+console.log(dog.static === Animal.Dog); // true
+console.log(dog.static.Extend === Animal); // true
+console.log(dog.static.prototype === Animal.Dog.prototype); // true
+console.log(dog.static.Extend.prototype === Animal.prototype); // true
+
+console.log("-------------------");
+
+console.log(typeof Animal.Dog); // 'function'
 console.log(typeof dog); // 'object'
+console.log(dog.toString()); // '[object Animal.Dog]'
 ```
 
 ## **3. Three Extended Classes With Static Members**
@@ -142,10 +218,12 @@ console.log(typeof dog); // 'object'
 Class.Define('Person', {
 	Static: {
 		Store: [],
+		Count: 0,
 		Register: function (person) {
 			// in Static block:
 			// - this context represents static context environment
 			this.Store[person.id] = person;
+			this.Count += 1;
 		}
 	},
 	Constructor: function (id, name) {
@@ -167,7 +245,7 @@ Class.Define('Employe', {
 	},
 	salary: 0,
 	GetInfo: function () {
-		return this.self.Name + " - name: " + this.name
+		return this.static.Name + " - name: " + this.name
 			+ ", id: " + this.id + ", salary: " + this.salary;
 	}
 });
@@ -188,30 +266,126 @@ Class.Define('Manager', {
 });
 
 // create class instance in standard way
-var prManager = new Manager(5, 'Douglas Bridges', 50000, 2);
+var prManager = new Manager(0, 'Douglas Bridges', 50000, 1);
 
 // create class instance by string as first argument, 
 // all constructor params as second argument array
-var secretary = Class.Create('Employe', [2, 'Janet Williams', 30000]);
+var secretary = Class.Create('Employe', 1, 'Janet Williams', 30000);
 
-// 'Employe - name: Janet Williams, id: 2, salary: 30000'
+// 'Employe - name: Janet Williams, id: 1, salary: 30000'
 console.log(secretary.GetInfo());
 
-// 'Manager - name: Douglas Bridges, id: 5, salary: 50000,
-// - secretary: Employe - name: Janet Williams, id: 2, salary: 30000'
+// 'Manager - name: Douglas Bridges, id: 0, salary: 50000,
+// - secretary: Employe - name: Janet Williams, id: 1, salary: 30000'
 console.log(prManager.GetInfo());
+
+// Primitive values are not linked,
+// so real count of registered persons
+// is written in Person.Count memory space
+console.log(Person.Count);	// 2
+console.log(Employe.Count);	// 0
+console.log(Manager.Count);	// 0
+
+// Nonprimitive values are lined as references,
+// so registered persons store is written 
+// in Person.Count memory space and two another links are created
+console.log(Person.Store.length);	// 2
+console.log(Employe.Store.length);	// 2
+console.log(Manager.Store.length);	// 2
 ```
 
-## **4. Class A, B, C And Parent Methods Calls Flows**
+## **4. Three Controller Classes And Different Behaviour In Actions**
+```javascript
+// System controller class - parent for all controllers:
+Class.Define('Controller', {
+	Static: {
+		Dispatch: function (path, actionName) {
+			new this.static(path)[actionName + 'Action']().Render();
+		}
+	},
+	Constructor: function (path) {
+		this.path = path;
+	},
+	path: null,
+	Render: function () {
+		console.log(JSON.stringify(this.path));
+	}
+});
+
+// Front controller class - parent for all front controllers:
+Class.Define('Controller.Front', {
+	Extend: Controller,
+	prepareView: function () {
+		this.view = {
+			path: this.path,
+			agent: navigator.appName,
+			lang: navigator.language
+		};
+	},
+	view: null,
+	Render: function () {
+		console.log(
+			JSON.stringify(this.view, null, "  ")
+		);
+	}
+});
+
+// Specific controller class for text pages,
+// this controller will be dispatched 4 times:
+Class.Define('Controller.Front.Default', {
+	Extend: Controller.Front,
+	prepareView: function () {
+		this.parent(arguments);
+		this.view.content = "You are here: '{0}'."
+			.format(this.view.path.substr(1));
+		this.view.layout = 'two-columns';
+		this.view.leftMenu = [
+			'About', 'Partners', 'Contacts'
+		];
+	},
+	HomeAction: function () {
+		/*****************************************************/
+		/* You can call parent method directly from         **/
+		/* any other method to skip current implementation! **/
+		this.parent.prepareView();
+		/*****************************************************/
+		this.view.content = 'Welcome to our website!';
+		this.view.layout = 'one-column';
+		return this;
+	},
+	DefaultAction: function () {
+		this.prepareView();
+		return this;
+	},
+	ContactsAction: function () {
+		this.prepareView();
+		this.view.contactMain = 'info@company.com';
+		return this;
+	}
+});
+
+
+// Dispatching different requests to different 
+// actions with different needs:
+
+var ctrlDef = Controller.Front.Default;
+
+ctrlDef.Dispatch('/home',		'Home');
+ctrlDef.Dispatch('/about-us',	'Default');
+ctrlDef.Dispatch('/partners',	'Default');
+ctrlDef.Dispatch('/contacts',	'Contacts');
+```
+
+## **5. Class A, B, C And Parent Methods Calls Flows**
 ```javascript
 Class.Define('A', {
 	Static: {
 		Create: function (one, two, three) {
-			console.log(this.Name+'::Create('+one+','+two+','+three+')');
-			return new this.self(one, two, three);
+			console.log(this.self.Name + '::Create(' + one + ',' + two + ',' + three + ')');
+			return Class.Create(this.static.Name, arguments);
 		},
 		FirstStatic: function (a, b, c) {
-			console.log(this.Name+'::FirstStatic('+a+','+b+','+c+')');
+			console.log(this.self.Name + '::FirstStatic(' + a + ',' + b + ',' + c + ')');
 			this._privateMethodWithUnderscore();
 		},
 		_privateMethodWithUnderscore: function () {
@@ -238,13 +412,12 @@ Class.Define('A', {
 Class.Define('B', {
 	Extend: A,
 	Static: {
-		Create: function (one, two, three) {
-			console.log(this.Name+'::Create('+one+','+two+','+three+')');
-			return new this.self(one, two, three);
+		FirstStatic: function (a, b, c) {
+			console.log("this is never called");
 		},
 		SecondStatic: function (a, b, c) {
-			console.log(this.Name+'::SecondStatic('+a+','+b+','+c+')');
-			this.FirstStatic(a, b, c);
+			console.log(this.self.Name+'::SecondStatic('+a+','+b+','+c+')');
+			this.parent.FirstStatic(a, b, c);
 			try {
 				this._privateMethodWithUnderscore();
 			} catch (e) {
@@ -254,7 +427,7 @@ Class.Define('B', {
 	},
 	Constructor: function (one, two, three) {
 		console.log(this.self.Name+'->Constructor('+one+','+two+','+three+')');
-		this.parent.apply(this, [one, two, three]);
+		this.parent(arguments);
 	},
 	FirstDynamic: function (x, y, z) {
 		console.log(this.self.Name+'->FirstDynamic('+x+','+y+','+z+')');
@@ -263,7 +436,7 @@ Class.Define('B', {
 	},
 	ThirdDynamic: function (x, y, z) {
 		console.log(this.self.Name+'->ThirdDynamic('+x+','+y+','+z+')');
-		this.parent.ThirdDynamic();
+		this.parent.ThirdDynamic(x, y, z);
 		return this;
 	}
 });
@@ -271,24 +444,23 @@ Class.Define('B', {
 Class.Define('C', {
 	Extend: B,
 	Static: {
-		Create: function (one, two, three) {
-			console.log(this.Name+'::Create('+one+','+two+','+three+')');
-			return Class.Create(this.self.Name, [].slice.apply(arguments));
-		},
-		FirstStatic: function (a, b, c) {
-			console.log(this.Name+'::FirstStatic('+a+','+b+','+c+')');
-		},
 		SecondStatic: function (a, b, c) {
-			console.log(this.Name+'::SecondStatic('+a+','+b+','+c+')');
+			console.log("this is never called");
 		},
 		ThirtStatic: function (a, b, c) {
-			console.log(this.Name+'::ThirtStatic('+a+','+b+','+c+')');
+			console.log(this.self.Name + '::ThirtStatic(' + a + ',' + b + ',' + c + ')');
 			this.parent.SecondStatic(a, b, c);
 		}
 	},
+	one: 0,
+	two: 0,
+	three: 0,
 	Constructor: function (one, two, three) {
+		this.one = one;
+		this.two = two;
+		this.three = three;
 		console.log(this.self.Name+'->Constructor('+one+','+two+','+three+')');
-		this.parent(one, two, three);
+		this.parent(arguments);
 	},
 	FirstDynamic: function (f, g, h) {
 		console.log(this.self.Name+'->FirstDynamic('+f+','+g+','+h+')');
@@ -352,39 +524,153 @@ var c = C.Create(1, 2, 3)
 	*/
 	.ThirdDynamic('x', 'y', 'z');
 
-console.log(c); // [object C]
+console.log(c.toString()); // [object C]
 ```
 
-### **5. Syntax Customization**
+### **6. Syntax Customization**
 ```javascript
-var $class = Class;
-$class.$define = Class.Define;
-$class.$create = Class.Create;
-$class.CustomizeSyntax({
-	ClassImprint	: '$classId',
-	InstanceImprint	: '$instanceId',
-	Extend			: '$extends',
-	Static			: '$static',
-	Constructor		: '$constructor',
-	Name			: '$name',
-	self			: '$self',
-	parent			: '$parent'
+// syntax customization at app start:
+Class.define = Class.Define;
+Class.create = Class.Create;
+Class.getByName = Class.GetByName;
+Class.CustomizeSyntax({
+	GetClassUid		: 'getClassUid',
+	GetInstanceUid	: 'getInstanceUid',
+    Inherited		: 'inherited',
+	Extend			: 'extend',
+	Static			: 'static',
+	// for 'constructor' is not possible to use javascript 
+	// build in function property 'constructor', use different:
+	Constructor		: 'construct',
+	Name			: 'name',
+	Fullname		: 'fullname',
+	Namespace		: 'namespace',
+	static			: 'static',
+	self			: 'self',
+	parent			: 'parent'
 });
-// new class declaration syntax
-var MyClass = $class({
-	$extends: ParentClass,
-	$static: {
-		create: function () {
-			return new $self();
+
+
+// Declare named class by Class.Define(...) 
+// call into global memory space as 'Animal'
+Class.define('Animal', {
+	static: {
+		getInstance: function () {
+			// this.static contains a child class definition
+			// as later static binding in PHP normaly works
+			return new this.static(arguments);
 		}
 	},
-	$constructor: function () {
-		this.$parent();
-		console.log("It works!");
+	construct: function (name, sound) {
+		this.name = name;
+		this.sound = sound;
+	},
+	name: '',
+	sound: '',
+	makeNoise: function () {
+		console.log(this.sound);
+	},
+	introduceYourself: function () {
+		console.log(
+			"People call me '{0}'.".format(this.name)
+		);
+	},
+	defineYourself: function (asdf) {
+		console.log(
+			"Globaly, I'm an '{0}'.".format(this.self.name) + '<br />' +
+			"More precisely, I'm a '{0}'.".format(this.static.name) + '<br />' +
+			"I live like an '{0}'.".format(this.static.namespace) + '<br />' +
+			"My namespace is '{0}'.".format(this.static.fullname)
+		);
 	}
 });
-// instance creating
-var myInstance = new MyClass(); // "It works!
+
+// Declare named classes by Class.Define(...) call 
+// into global memory space as 'Animal.Dog' and 'Animal.Cat'
+// as extended classes from 'Animal' class.
+Class.define('Animal.Dog', {
+	extend: Animal,
+	tellYourStory: function () {
+		this.makeNoise();
+		this.introduceYourself();
+		this.defineYourself();
+		console.log("But I'm the best friend of human.")
+	}
+});
+Class.define('Animal.Cat', {
+	extend: Animal,
+	tellYourStory: function () {
+		this.makeNoise();
+		this.introduceYourself();
+		this.defineYourself();
+		console.log(
+			"I don't care about people, but sometimes <br />" +
+			"they have something very good to eat."
+		);
+	}
+});
+
+// Create instances (both ways are doing the same):
+var dog = new Animal.Dog("Charlie", "Wrr haf!");
+var cat = Animal.Cat.getInstance('Suzy', 'Pchchchchch!');
+
+// 'Wrr haf!'
+// People call me 'Charlie'.
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Dog'.
+// I live between 'Animal'.
+// My type is 'Animal.Dog'.
+
+// But the best friend of human.
+dog.tellYourStory();
+
+
+console.log("-------------------");
+
+
+// Pchchchchch! [String]
+// People call me 'Suzy'. [String]
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Cat'.
+// I live between 'Animal'.
+// My type is 'Animal.Cat'. [String]
+
+// I don't care about people, but sometimes 
+// they have something very good to eat.
+cat.tellYourStory();
+
+
+
+console.log("-------------------");
+
+console.log(dog instanceof Animal); // true
+console.log(dog instanceof Animal.Dog); // true
+console.log(dog instanceof Animal.Cat); // false
+console.log(dog instanceof Date); // false
+
+console.log("-------------------");
+
+console.log(dog.static.name); // 'Dog'
+console.log(dog.static.fullname); // 'Animal.Dog'
+console.log(dog.static.namespace); // 'Animal'
+console.log(dog.static.extend.name); // 'Animal'
+console.log(dog.static.extend.fullname); // 'Animal'
+console.log(dog.static.extend.namespace); // ''
+
+console.log("-------------------");
+
+console.log(dog.static === Animal.Dog); // true
+console.log(dog.static.extend === Animal); // true
+console.log(dog.static.prototype === Animal.Dog.prototype); // true
+console.log(dog.static.extend.prototype === Animal.prototype); // true
+
+console.log("-------------------");
+
+console.log(typeof Animal.Dog); // 'function'
+console.log(typeof dog); // 'object'
+console.log(dog.toString()); // '[object Animal.Dog]'
 ```
 ### **Browser Usage**
 - install any browser if necessary (MSIE6+, Firefox, Google Chrome, Safari, Opera...)
@@ -397,7 +683,7 @@ var myInstance = new MyClass(); // "It works!
 		<meta charset="UTF-8" />
 	</head>
 	<body>
-		<script src="./class.min.js" type="text/javascript"></script>
+		<script src="./class.dev.js" type="text/javascript"></script>
 		<script type="text/javascript">
 			var MyClass = Class({
 				Constructor: function () {
@@ -415,7 +701,7 @@ var myInstance = new MyClass(); // "It works!
 - create new empty text file with name "example.js":
 - type into command line window "node example.js" to run
 ```javascript
-require('./class.min.js');
+require('./class.dev.js');
 var MyClass = Class({
 	Constructor: function () {
 		console.log("It works!");
@@ -428,7 +714,7 @@ var myInstance = new MyClass(); // "It works!
 - doubleclick on the file "example.wsf" to run
 ```html
 <job>
-	<script type="JScript" src="./class.min.js"></script>
+	<script type="JScript" src="./class.dev.js"></script>
 	<script type="JScript">
 		var MyClass = Class({
 			Constructor: function () {
@@ -442,7 +728,8 @@ var myInstance = new MyClass(); // "It works!
 
 ## **DEMOS**
 - [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
-- [2. Class Dog Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
+- [2. Class Dog And Cat Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
 - [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
-- [4. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/04-class-a-b-c-and-parent-calls/index.html)
-- [5. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
+- [4. Three Controller Classes And Different Behaviour In Actions](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
+- [5. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/04-class-a-b-c-and-parent-calls/index.html)
+- [6. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)

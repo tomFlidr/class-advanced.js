@@ -1,6 +1,6 @@
 {
   "name": "class.js",
-  "version": "1.4.2",
+  "version": "2.0.0",
   "license": "MIT",
   "description": "Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection. For all browsers, Node.js and Windows Script Host.",
   "homepage": "https://github.com/tomFlidr/class.js",
@@ -23,6 +23,9 @@
     "javascript prototypal",
     "javascript prototype",
     "javascript simple",
+	"javascript class visual studio",
+	"javascript class .net",
+	"javascript class vs",
     "javascript lightweight",
     "javascript cross browser",
     "javascript class universal",

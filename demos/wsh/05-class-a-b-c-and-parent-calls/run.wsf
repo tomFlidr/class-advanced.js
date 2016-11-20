@@ -1,0 +1,8 @@
+<job>
+	<script type="JScript" src="../../../builds/latest/class.dev.js"></script>
+	<script type="JScript" src="../../resources/js/wsh-examples.js"></script>
+	<script type="JScript" src="example.js"></script>
+	<script type="JScript">
+		console.echo();
+	</script>
+</job>
