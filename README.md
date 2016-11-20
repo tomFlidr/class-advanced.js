@@ -1,19 +1,22 @@
 # **Javascript Class (Class.js)**
 
+[![Latest Stable Version](https://img.shields.io/badge/stable-2.0.0-green.svg)](https://github.com/tomFlidr/class.js/releases)
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tomFlidr/class.js/blob/master/LICENCE)
+
  Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection and much more. For all browsers, Node.js and Windows Script Host.
 
-* [class.min.js download](https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js)
+* [**class.min.js download**](https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js)
 
 ```html
 <script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.0.0/class.min.js"></script>
 ```
 ## **DEMOS**
-- [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
-- [2. Class Dog And Cat Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)
-- [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
-- [4. Three Controller Classes And Different Behaviour In Actions](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
-- [5. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/05-class-a-b-c-and-parent-calls/index.html)
-- [6. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/06-syntax-customization/index.html)
+- [**1. Basic Class - Animal**](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
+- [**2. Class Dog And Cat Extends Animal**](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)
+- [**3. Three Extended Classes With Static Members**](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
+- [**4. Three Controller Classes And Different Behaviour In Actions**](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
+- [**5. Class A, B, C And Parent Methods Calls Flows**](https://tomflidr.github.io/class.js/demos/browsers/05-class-a-b-c-and-parent-calls/index.html)
+- [**6. Syntax Customization**](https://tomflidr.github.io/class.js/demos/browsers/06-syntax-customization/index.html)
 
 ## **Features**
 - very fast, effective, supersmall - all in **6.8 KB - minimized**, **2.6 KB - gzipped**
@@ -727,9 +730,9 @@ var myInstance = new MyClass(); // "It works!
 ```
 
 ## **DEMOS**
-- [1. Basic Class - Animal](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
-- [2. Class Dog And Cat Extends Animal](https://tomflidr.github.io/class.js/demos/browsers/02-class-dog-extends-animal/index.html)
-- [3. Three Extended Classes With Static Members](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
-- [4. Three Controller Classes And Different Behaviour In Actions](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
-- [5. Class A, B, C And Parent Methods Calls Flows](https://tomflidr.github.io/class.js/demos/browsers/04-class-a-b-c-and-parent-calls/index.html)
-- [6. Syntax Customization](https://tomflidr.github.io/class.js/demos/browsers/05-syntax-customization/index.html)
+- [**1. Basic Class - Animal**](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
+- [**2. Class Dog And Cat Extends Animal**](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)
+- [**3. Three Extended Classes With Static Members**](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
+- [**4. Three Controller Classes And Different Behaviour In Actions**](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
+- [**5. Class A, B, C And Parent Methods Calls Flows**](https://tomflidr.github.io/class.js/demos/browsers/05-class-a-b-c-and-parent-calls/index.html)
+- [**6. Syntax Customization**](https://tomflidr.github.io/class.js/demos/browsers/06-syntax-customization/index.html)
