@@ -44,8 +44,8 @@
   - **this.static;** // without the need to know class name itself
   - this.self context (static class definition) is changed in each defined dynamic and static method
     into value coresponded with original definition place
-  - this.static context (static class definition) is not changed and it's all time coresponds to
-    static class context from instance context - like later spatic binding in PHP OOP
+  - this.static context (static class definition) is not changed and it all time coresponds to
+    original instance context - like [**Late Static Bindings**](http://php.net/manual/en/language.oop5.late-static-bindings.php) in PHP OOP
 - posibility to get class name / fullname / namespace (only if class is defined by Class.Define();) by: 
   - **this.self.Fullname;** or **this.static.Fullname;**
   - **this.self.Name;** or **this.static.Name;**

@@ -1,0 +1,2 @@
+@node example.js
+pause
