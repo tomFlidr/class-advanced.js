@@ -36,14 +36,16 @@
 		"javascript class nodejs",
 		"javascript class windows script host wsh"
 	],
+	"require": {
+	},
 	"author": {
 		"name": "Tom Flidr",
 		"web": "https://github.com/tomFlidr/"
 	},
-	"minimum-stability": "2.0.0",
+	"minimum-stability": "dev",
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.0.0"
+			"dev-master": "2.0-dev"
 		}
 	}
 }
