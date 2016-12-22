@@ -15,6 +15,8 @@
     <Folder Include="archive\1.4.0\" />
     <Folder Include="archive\1.4.1\" />
     <Folder Include="archive\1.4.2\" />
+    <Folder Include="archive\2.0.0\" />
+    <Folder Include="archive\2.0.1\" />
     <Folder Include="builds\" />
     <Folder Include="builds\0.6.0\" />
     <Folder Include="builds\1.0.0\" />
@@ -25,6 +27,7 @@
     <Folder Include="builds\1.4.1\" />
     <Folder Include="builds\1.4.2\" />
     <Folder Include="builds\2.0.0\" />
+    <Folder Include="builds\2.0.1\" />
     <Folder Include="builds\latest\" />
     <Folder Include="demos\" />
     <Folder Include="demos\browsers\" />
@@ -65,6 +68,8 @@
     <Compile Include="archive\1.4.0\class.js.zip" />
     <Compile Include="archive\1.4.1\class.js.zip" />
     <Compile Include="archive\1.4.2\class.js.zip" />
+    <Compile Include="archive\2.0.0\class.js.zip" />
+    <Compile Include="archive\2.0.1\class.js.zip" />
     <Compile Include="builds\0.6.0\class.min.js" />
     <Compile Include="builds\0.6.0\class.src.js" />
     <Compile Include="builds\1.0.0\class.dev.js" />
@@ -91,6 +96,9 @@
     <Compile Include="builds\2.0.0\class.dev.js" />
     <Compile Include="builds\2.0.0\class.min.js" />
     <Compile Include="builds\2.0.0\class.src.js" />
+    <Compile Include="builds\2.0.1\class.dev.js" />
+    <Compile Include="builds\2.0.1\class.min.js" />
+    <Compile Include="builds\2.0.1\class.src.js" />
     <Compile Include="builds\latest\class.dev.js" />
     <Compile Include="builds\latest\class.min.js" />
     <Compile Include="builds\latest\class.src.js" />
