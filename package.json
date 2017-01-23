@@ -1,5 +1,5 @@
 {
-  "name": "class.js",
+  "name": "class",
   "version": "2.0.2",
   "license": "MIT",
   "description": "Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection. For all browsers, Node.js and Windows Script Host.",
@@ -8,23 +8,23 @@
     "javascript",
     "class",
     "javascript class",
-    "javascript class",
     "javascript oop",
     "javascript parent",
     "javascript class parent",
     "javascript extends",
-	"javascript extend",
+    "javascript extend",
     "javascript extending",
     "javascript extends",
     "javascript extending",
     "javascript static",
+    "javascript self",
     "javascript dynamic",
     "javascript inheritance",
     "javascript prototypal",
     "javascript prototype",
-    "javascript simple",
-	"javascript class visual studio",
-	"javascript class .net",
+    "javascript reflection",
+    "javascript class visual studio",
+    "javascript class .net",
 	"javascript class vs",
     "javascript lightweight",
     "javascript cross browser",
@@ -43,15 +43,14 @@
     "type": "git",
     "url": "https://github.com/tomFlidr/class.js.git"
   },
-  "filename": "class.min.js",
+  "filename": "builds/latest/class.dev.js",
   "autoupdate": {
     "source": "git",
     "target": "git://github.com/tomFlidr/class.js.git",
     "basePath": "src",
     "files": [
-      "class.min.js",
-      "class.dev.js",
-      "class.src.js"
+      "builds/latest/class.min.js",
+      "builds/latest/class.dev.js"
     ]
   }
 }
