@@ -1,1 +1,11 @@
-
+archive/*
+builds/0.*
+builds/1.*
+builds/2.*
+demos/*
+devel-tools/*
+.gitignore
+Class.pssproj
+Class.pssproj.user
+Class.sln
+_references.js
