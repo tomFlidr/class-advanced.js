@@ -9,3 +9,6 @@ Class.pssproj
 Class.pssproj.user
 Class.sln
 _references.js
+.npmignore
+LICENCE
+README.md
