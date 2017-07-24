@@ -588,7 +588,7 @@ Class = (function (_globalScope) {
 				typeof (_cfgExtendProto[_dynamicName]) == 'function' && // if dynamic element in parent class definition is a function
 				!(_dynamicName in cfg)// if dynamic name is not declared in current class definition config
 			) {
-				_classDefinitionProto[_dynamicName] = $class._parentCallProvider(_dynamicName, 0)
+				_classDefinitionProto[_dynamicName] = $class._parentCallProvider(_dynamicName, _staticCalls)
 			}
 		}
 	};
