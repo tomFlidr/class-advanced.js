@@ -3,20 +3,22 @@ Class.define = Class.Define;
 Class.create = Class.Create;
 Class.getByName = Class.GetByName;
 Class.CustomizeSyntax({
-	GetClassUid: 'getClassUid',
-	GetInstanceUid: 'getInstanceUid',
-	Inherited: 'inherited',
-	Extend: 'extend',
-	Static: 'static',
+	GetClassUid		: 'getClassUid',
+	GetInstanceUid	: 'getInstanceUid',
+    Inherited		: 'inherited',
+	Extend			: 'extend',
+	Static			: 'static',
 	// for 'constructor' is not possible to use javascript 
 	// build in function property 'constructor', use different:
 	Constructor: 'construct',
-	Name: 'name',
-	Fullname: 'fullname',
-	Namespace: 'namespace',
-	static: 'static',
-	self: 'self',
-	parent: 'parent'
+	// for 'name' is not possible to use javascript 
+	// build in 'Function.name' property, use different:
+	Name			: 'className',
+	Fullname		: 'classFullname',
+	Namespace		: 'classNamespace',
+	static			: 'static',
+	self			: 'self',
+	parent			: 'parent'
 });
 
 
@@ -44,13 +46,20 @@ Class.define('Animal', {
 			"People call me '{0}'.".format(this.name)
 		);
 	},
-	defineYourself: function (asdf) {
+	defineYourself: function () {
 		console.log(
-			"Globaly, I'm an '{0}'.".format(this.self.name) + "\n" +
-			"More precisely, I'm a '{0}'.".format(this.static.name) + "\n" +
-			"I live like an '{0}'.".format(this.static.namespace) + "\n" +
-			"My namespace is '{0}'.".format(this.static.fullname)
+			"Globaly, I'm an '{0}'.".format(this.self.className)
+			+ '<br />' +
+			"More precisely, I'm a '{0}'.".format(this.static.className)
+			+ '<br />' +
+			"I belong to namespace '{0}'.".format(this.static.classNamespace)
+			+ '<br />' +
+			"My full description is '{0}'.".format(this.static.classFullname)
 		);
+	},
+	tellYourStory: function () {
+		this.makeNoise();
+		this.defineYourself();
 	}
 });
 
@@ -73,15 +82,29 @@ Class.define('Animal.Cat', {
 		this.introduceYourself();
 		this.defineYourself();
 		console.log(
-			"I don't care about people, but sometimes \n" +
+			"I don't care about people, but sometimes <br />" +
 			"they have something very good to eat."
 		);
 	}
 });
 
-// Create instances (both ways are doing the same):
+// Create instances:
+var creature = Class.create("Animal", "Creature", "Rrroooaaarrr!")
 var dog = new Animal.Dog("Charlie", "Wrr haf!");
 var cat = Animal.Cat.getInstance('Suzy', 'Pchchchchch!');
+
+
+
+// 'Rrroooaaarrr!'
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Animal'.
+// I belong to namespace ''.
+// My full description is 'Animal'.
+creature.tellYourStory();
+
+
+console.log("-------------------");
 
 // 'Wrr haf!'
 // People call me 'Charlie'.
@@ -121,12 +144,12 @@ console.log(dog instanceof Date); // false
 
 console.log("-------------------");
 
-console.log(dog.static.name); // 'Dog'
-console.log(dog.static.fullname); // 'Animal.Dog'
-console.log(dog.static.namespace); // 'Animal'
-console.log(dog.static.extend.name); // 'Animal'
-console.log(dog.static.extend.fullname); // 'Animal'
-console.log(dog.static.extend.namespace); // ''
+console.log(dog.static.className); // 'Dog'
+console.log(dog.static.classFullname); // 'Animal.Dog'
+console.log(dog.static.classNamespace); // 'Animal'
+console.log(dog.static.extend.className); // 'Animal'
+console.log(dog.static.extend.classFullname); // 'Animal'
+console.log(dog.static.extend.classNamespace); // ''
 
 console.log("-------------------");
 

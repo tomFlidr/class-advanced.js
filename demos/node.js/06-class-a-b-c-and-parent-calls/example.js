@@ -1,3 +1,6 @@
+require('../../resources/js/node-examples.js');
+require('../../../builds/latest/class.dev.js');
+
 Class.Define('A', {
 	Static: {
 		Create: function (one, two, three) {
@@ -6,10 +9,6 @@ Class.Define('A', {
 		},
 		FirstStatic: function (a, b, c) {
 			console.log(this.self.Name + '::FirstStatic(' + a + ',' + b + ',' + c + ')');
-			this._privateMethodWithUnderscore();
-		},
-		_privateMethodWithUnderscore: function () {
-			console.log(this.Name + '::_privateMethodWithUnderscore();');
 		}
 	},
 	Constructor: function (one, two, three) {
@@ -38,11 +37,6 @@ Class.Define('B', {
 		SecondStatic: function (a, b, c) {
 			console.log(this.self.Name + '::SecondStatic(' + a + ',' + b + ',' + c + ')');
 			this.parent.FirstStatic(a, b, c);
-			try {
-				this._privateMethodWithUnderscore();
-			} catch (e) {
-				console.log(e.message);
-			}
 		}
 	},
 	Constructor: function (one, two, three) {
@@ -105,10 +99,6 @@ This code flows through methods:
 	C::ThirtStatic(a,b,c)
 		B::SecondStatic(a,b,c)
 			A::FirstStatic(a,b,c)
-			A::_privateMethodWithUnderscore();
-		Error: Private method call: 
-		'_privateMethodWithUnderscore' 
-		not allowed from class context: 'B'.
 	C::Create(1,2,3)
 */
 C.ThirtStatic('a', 'b', 'c');

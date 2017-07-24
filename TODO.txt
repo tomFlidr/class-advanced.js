@@ -1,3 +1,0 @@
-- opravit hlídání volání provátních metod - sice se nemají dědit,
-  ale mohou je volat implementace jiných metod v parent třídě, které jsou volány z třídy potomka, ale potomek je přímo nevolá,
-  což asi nepůjde rozumně zachytávat, takže bude lepší takovou pičovinu oddělat...

@@ -2,14 +2,13 @@
 Class.Define('Controller', {
 	Static: {
 		Dispatch: function (path, actionName) {
-			console.log(this.static.Fullname);
 			new this.static(path)[actionName + 'Action']().Render();
 		}
 	},
 	Constructor: function (path) {
 		this.path = path;
 	},
-	path: '',
+	path: null,
 	Render: function () {
 		console.log(JSON.stringify(this.path));
 	}
@@ -25,7 +24,7 @@ Class.Define('Controller.Front', {
 			lang: 'en'
 		};
 	},
-	view: {},
+	view: null,
 	Render: function () {
 		console.log(
 			JSON.stringify(this.view, null, "   ")
@@ -38,9 +37,9 @@ Class.Define('Controller.Front', {
 Class.Define('Controller.Front.Default', {
 	Extend: Controller.Front,
 	prepareView: function () {
-		this.parent();
+		this.parent(arguments);
 		this.view.content = "You are here: '{0}'."
-			.format(this.path.substr(1));
+			.format(this.view.path.substr(1));
 		this.view.layout = 'two-columns';
 		this.view.leftMenu = [
 			'About', 'Partners', 'Contacts'
@@ -73,10 +72,7 @@ Class.Define('Controller.Front.Default', {
 
 var ctrlDef = Controller.Front.Default;
 
-ctrlDef.Dispatch('/home', 'Home');
-console.log("------------------------");
-ctrlDef.Dispatch('/about-us', 'Default');
-console.log("------------------------");
-ctrlDef.Dispatch('/partners', 'Default');
-console.log("------------------------");
+ctrlDef.Dispatch('/home',		'Home');
+ctrlDef.Dispatch('/about-us',	'Default');
+ctrlDef.Dispatch('/partners',	'Default');
 ctrlDef.Dispatch('/contacts',	'Contacts');

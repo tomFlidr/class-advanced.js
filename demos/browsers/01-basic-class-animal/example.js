@@ -1,5 +1,6 @@
-// Declare not named class by Class(...) 
-// call into custom variable 'Animal':
+// Declare class without internal name 
+// by calling global helper function 'Class(...)',
+// returned into custom variable 'Animal':
 var Animal = Class({
 	Constructor: function (name, sound) {
 		this.name = name;

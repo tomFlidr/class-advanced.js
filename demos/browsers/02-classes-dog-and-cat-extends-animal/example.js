@@ -22,16 +22,20 @@ Class.Define('Animal', {
 			"People call me '{0}'.".format(this.name)
 		);
 	},
-	DefineYourself: function (asdf) {
+	DefineYourself: function () {
 		console.log(
 			"Globaly, I'm an '{0}'.".format(this.self.Name)
 			+ '<br />' +
 			"More precisely, I'm a '{0}'.".format(this.static.Name)
 			+ '<br />' +
-			"I live like an '{0}'.".format(this.static.Namespace)
+			"I belong to namespace '{0}'.".format(this.static.Namespace)
 			+ '<br />' +
-			"My namespace is '{0}'.".format(this.static.Fullname)
+			"My full description is '{0}'.".format(this.static.Fullname)
 		);
+	},
+	TellYourStory: function () {
+		this.MakeNoise();
+		this.DefineYourself();
 	}
 });
 
@@ -60,17 +64,31 @@ Class.Define('Animal.Cat', {
 	}
 });
 
-// Create instances (both ways are doing the same):
+// Create instances:
+var creature = Class.Create("Animal", "Creature", "Rrroooaaarrr!")
 var dog = new Animal.Dog("Charlie", "Wrr haf!");
 var cat = Animal.Cat.GetInstance('Suzy', 'Pchchchchch!');
+
+
+
+// 'Rrroooaaarrr!'
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Animal'.
+// I belong to namespace ''.
+// My full description is 'Animal'.
+creature.TellYourStory();
+
+
+console.log("-------------------");
 
 // 'Wrr haf!'
 // People call me 'Charlie'.
 
 // Globaly, I'm an 'Animal'.
 // More precisely, I'm a 'Dog'.
-// I live between 'Animal'.
-// My type is 'Animal.Dog'.
+// I belong to namespace 'Animal'.
+// My full description is 'Animal.Dog'.
 
 // But the best friend of human.
 dog.TellYourStory();
@@ -84,8 +102,8 @@ console.log("-------------------");
 
 // Globaly, I'm an 'Animal'.
 // More precisely, I'm a 'Cat'.
-// I live between 'Animal'.
-// My type is 'Animal.Cat'. [String]
+// I belong to namespace 'Animal'.
+// My full description is 'Animal.Cat'. [String]
 
 // I don't care about people, but sometimes 
 // they have something very good to eat.

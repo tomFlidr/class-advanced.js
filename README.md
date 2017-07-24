@@ -1,6 +1,6 @@
 # **Javascript Class (Class.js)**
 
-[![Latest Stable Version](https://img.shields.io/badge/stable-2.0.2-green.svg)](https://github.com/tomFlidr/class.js/releases)
+[![Latest Stable Version](https://img.shields.io/badge/stable-2.1.0-green.svg)](https://github.com/tomFlidr/class.js/releases)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tomFlidr/class.js/blob/master/LICENCE)
 
  Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection and much more. For all browsers, Node.js and Windows Script Host.
@@ -13,27 +13,28 @@ npm install tomFlidr/class.js
 
 ## **DOWNLOAD**
  
-* [**download class.dev.js (for development with JSDocs comments for IDE)**](https://tomflidr.github.io/class.js/builds/2.0.2/class.dev.js)
-* [**download class.min.js (for production)**](https://tomflidr.github.io/class.js/builds/2.0.2/class.min.js)
+* [**download class.dev.js (for development with JSDocs comments for IDE)**](https://tomflidr.github.io/class.js/builds/2.1.0/class.dev.js)
+* [**download class.min.js (for production)**](https://tomflidr.github.io/class.js/builds/2.1.0/class.min.js)
 
 ```html
 <!-- for production: -->
-<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.0.2/class.min.js"></script>
+<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.1.0/class.min.js"></script>
 
 <!-- for development with JSDocs comments for IDE: -->
-<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.0.2/class.dev.js"></script>
+<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.1.0/class.dev.js"></script>
 ```
 
 ## **DEMOS**
 - [**1. Basic Class - Animal**](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
 - [**2. Class Dog And Cat Extends Animal**](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)
-- [**3. Three Extended Classes With Static Members**](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
-- [**4. Three Controller Classes And Different Behaviour In Actions**](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
-- [**5. Class A, B, C And Parent Methods Calls Flows**](https://tomflidr.github.io/class.js/demos/browsers/05-class-a-b-c-and-parent-calls/index.html)
-- [**6. Syntax Customization**](https://tomflidr.github.io/class.js/demos/browsers/06-syntax-customization/index.html)
+- [**3. Late Static Binding**](https://tomflidr.github.io/class.js/demos/browsers/03-late-static-binding/index.html)
+- [**4. Three Extended Classes With Static Members**](https://tomflidr.github.io/class.js/demos/browsers/04-three-extended-classes-with-static-members/index.html)
+- [**5. Three Controller Classes And Different Behaviour In Actions**](https://tomflidr.github.io/class.js/demos/browsers/05-three-controller-classes-and-different-behaviour-in-actions/index.html)
+- [**6. Class A, B, C And Parent Methods Calls Flows**](https://tomflidr.github.io/class.js/demos/browsers/06-class-a-b-c-and-parent-calls/index.html)
+- [**7. Syntax Customization**](https://tomflidr.github.io/class.js/demos/browsers/07-syntax-customization/index.html)
 
 ## **Features**
-- very fast, effective, supersmall - all in **6.8 KB - minimized**, **2.6 KB - gzipped**
+- very fast, effective, supersmall - all in **6.5 KB - minimized**, **2.4 KB - gzipped**
 - multi environment:
   - **all browsers** (MSIE6+, Safari, Opera, Chrome)
   - **Node.js**
@@ -75,6 +76,7 @@ npm install tomFlidr/class.js
 - **inheritance checking** by javascript 'instanceof' keyword
 - posibility to create anonymous classes like:
   - **new Class({Constructor:function(text){console.log(text)}})("It works!");**
+- Visual Studio - Go To Definition (F12) support - for current level objects and parent methods
 
 ## **1. Basic Class - Animal**
 ```javascript
@@ -142,6 +144,10 @@ Class.Define('Animal', {
 			+ '<br />' +
 			"My namespace is '{0}'.".format(this.static.Fullname)
 		);
+	},
+	TellYourStory: function () {
+		this.MakeNoise();
+		this.DefineYourself();
 	}
 });
 
@@ -170,9 +176,24 @@ Class.Define('Animal.Cat', {
 	}
 });
 
-// Create instances (both ways are doing the same):
+// Create instances (all ways are creating an instance):
+var creature = Class.Create("Animal", "Creature", "Rrroooaaarrr!")
 var dog = new Animal.Dog("Charlie", "Wrr haf!");
 var cat = Animal.Cat.GetInstance('Suzy', 'Pchchchchch!');
+
+
+
+// 'Rrroooaaarrr!'
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Animal'.
+// I belong to namespace ''.
+// My full description is 'Animal'.
+creature.TellYourStory();
+
+
+console.log("-------------------");
+
 
 // 'Wrr haf!'
 // People call me 'Charlie'.
@@ -232,7 +253,7 @@ console.log(typeof dog); // 'object'
 console.log(dog.toString()); // '[object Animal.Dog]'
 ```
 
-## **3. Three Extended Classes With Static Members**
+## **4. Three Extended Classes With Static Members**
 ```javascript
 Class.Define('Person', {
 	Static: {
@@ -313,7 +334,7 @@ console.log(Employe.Store.length);	// 2
 console.log(Manager.Store.length);	// 2
 ```
 
-## **4. Three Controller Classes And Different Behaviour In Actions**
+## **5. Three Controller Classes And Different Behaviour In Actions**
 ```javascript
 // System controller class - parent for all controllers:
 Class.Define('Controller', {
@@ -395,7 +416,7 @@ ctrlDef.Dispatch('/partners',	'Default');
 ctrlDef.Dispatch('/contacts',	'Contacts');
 ```
 
-## **5. Class A, B, C And Parent Methods Calls Flows**
+## **6. Class A, B, C And Parent Methods Calls Flows**
 ```javascript
 Class.Define('A', {
 	Static: {
@@ -405,10 +426,6 @@ Class.Define('A', {
 		},
 		FirstStatic: function (a, b, c) {
 			console.log(this.self.Name + '::FirstStatic(' + a + ',' + b + ',' + c + ')');
-			this._privateMethodWithUnderscore();
-		},
-		_privateMethodWithUnderscore: function () {
-			console.log(this.Name+'::_privateMethodWithUnderscore();');
 		}
 	},
 	Constructor: function (one, two, three) {
@@ -437,11 +454,6 @@ Class.Define('B', {
 		SecondStatic: function (a, b, c) {
 			console.log(this.self.Name+'::SecondStatic('+a+','+b+','+c+')');
 			this.parent.FirstStatic(a, b, c);
-			try {
-				this._privateMethodWithUnderscore();
-			} catch (e) {
-				console.log(e.message);
-			}
 		}
 	},
 	Constructor: function (one, two, three) {
@@ -504,10 +516,6 @@ This code flows through methods:
 	C::ThirtStatic(a,b,c)
 		B::SecondStatic(a,b,c)
 			A::FirstStatic(a,b,c)
-			A::_privateMethodWithUnderscore();
-		Error: Private method call: 
-		'_privateMethodWithUnderscore' 
-		not allowed from class context: 'B'.
 	C::Create(1,2,3)
 */
 C.ThirtStatic('a', 'b', 'c');
@@ -546,7 +554,7 @@ var c = C.Create(1, 2, 3)
 console.log(c.toString()); // [object C]
 ```
 
-### **6. Syntax Customization**
+### **7. Syntax Customization**
 ```javascript
 // syntax customization at app start:
 Class.define = Class.Define;
@@ -560,10 +568,12 @@ Class.CustomizeSyntax({
 	Static			: 'static',
 	// for 'constructor' is not possible to use javascript 
 	// build in function property 'constructor', use different:
-	Constructor		: 'construct',
-	Name			: 'name',
-	Fullname		: 'fullname',
-	Namespace		: 'namespace',
+	Constructor: 'construct',
+	// for 'name' is not possible to use javascript 
+	// build in 'Function.name' property, use different:
+	Name			: 'className',
+	Fullname		: 'classFullname',
+	Namespace		: 'classNamespace',
 	static			: 'static',
 	self			: 'self',
 	parent			: 'parent'
@@ -594,13 +604,20 @@ Class.define('Animal', {
 			"People call me '{0}'.".format(this.name)
 		);
 	},
-	defineYourself: function (asdf) {
+	defineYourself: function () {
 		console.log(
-			"Globaly, I'm an '{0}'.".format(this.self.name) + '<br />' +
-			"More precisely, I'm a '{0}'.".format(this.static.name) + '<br />' +
-			"I live like an '{0}'.".format(this.static.namespace) + '<br />' +
-			"My namespace is '{0}'.".format(this.static.fullname)
+			"Globaly, I'm an '{0}'.".format(this.self.className)
+			+ '<br />' +
+			"More precisely, I'm a '{0}'.".format(this.static.className)
+			+ '<br />' +
+			"I belong to namespace '{0}'.".format(this.static.classNamespace)
+			+ '<br />' +
+			"My full description is '{0}'.".format(this.static.classFullname)
 		);
+	},
+	tellYourStory: function () {
+		this.makeNoise();
+		this.defineYourself();
 	}
 });
 
@@ -629,9 +646,23 @@ Class.define('Animal.Cat', {
 	}
 });
 
-// Create instances (both ways are doing the same):
+// Create instances:
+var creature = Class.create("Animal", "Creature", "Rrroooaaarrr!")
 var dog = new Animal.Dog("Charlie", "Wrr haf!");
 var cat = Animal.Cat.getInstance('Suzy', 'Pchchchchch!');
+
+
+
+// 'Rrroooaaarrr!'
+
+// Globaly, I'm an 'Animal'.
+// More precisely, I'm a 'Animal'.
+// I belong to namespace ''.
+// My full description is 'Animal'.
+creature.tellYourStory();
+
+
+console.log("-------------------");
 
 // 'Wrr haf!'
 // People call me 'Charlie'.
@@ -671,12 +702,12 @@ console.log(dog instanceof Date); // false
 
 console.log("-------------------");
 
-console.log(dog.static.name); // 'Dog'
-console.log(dog.static.fullname); // 'Animal.Dog'
-console.log(dog.static.namespace); // 'Animal'
-console.log(dog.static.extend.name); // 'Animal'
-console.log(dog.static.extend.fullname); // 'Animal'
-console.log(dog.static.extend.namespace); // ''
+console.log(dog.static.className); // 'Dog'
+console.log(dog.static.classFullname); // 'Animal.Dog'
+console.log(dog.static.classNamespace); // 'Animal'
+console.log(dog.static.extend.className); // 'Animal'
+console.log(dog.static.extend.classFullname); // 'Animal'
+console.log(dog.static.extend.classNamespace); // ''
 
 console.log("-------------------");
 
@@ -748,7 +779,8 @@ var myInstance = new MyClass(); // "It works!
 ## **DEMOS**
 - [**1. Basic Class - Animal**](https://tomflidr.github.io/class.js/demos/browsers/01-basic-class-animal/index.html)
 - [**2. Class Dog And Cat Extends Animal**](https://tomflidr.github.io/class.js/demos/browsers/02-classes-dog-and-cat-extends-animal/index.html)
-- [**3. Three Extended Classes With Static Members**](https://tomflidr.github.io/class.js/demos/browsers/03-three-extended-classes-with-static-members/index.html)
-- [**4. Three Controller Classes And Different Behaviour In Actions**](https://tomflidr.github.io/class.js/demos/browsers/04-three-controller-classes-and-different-behaviour-in-actions/index.html)
-- [**5. Class A, B, C And Parent Methods Calls Flows**](https://tomflidr.github.io/class.js/demos/browsers/05-class-a-b-c-and-parent-calls/index.html)
-- [**6. Syntax Customization**](https://tomflidr.github.io/class.js/demos/browsers/06-syntax-customization/index.html)
+- [**3. Late Static Binding**](https://tomflidr.github.io/class.js/demos/browsers/03-late-static-binding/index.html)
+- [**4. Three Extended Classes With Static Members**](https://tomflidr.github.io/class.js/demos/browsers/04-three-extended-classes-with-static-members/index.html)
+- [**5. Three Controller Classes And Different Behaviour In Actions**](https://tomflidr.github.io/class.js/demos/browsers/05-three-controller-classes-and-different-behaviour-in-actions/index.html)
+- [**6. Class A, B, C And Parent Methods Calls Flows**](https://tomflidr.github.io/class.js/demos/browsers/06-class-a-b-c-and-parent-calls/index.html)
+- [**7. Syntax Customization**](https://tomflidr.github.io/class.js/demos/browsers/07-syntax-customization/index.html)
