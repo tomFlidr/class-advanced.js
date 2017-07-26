@@ -1,6 +1,6 @@
 # **Javascript Class (Class.js)**
 
-[![Latest Stable Version](https://img.shields.io/badge/stable-2.1.0-green.svg)](https://github.com/tomFlidr/class.js/releases)
+[![Latest Stable Version](https://img.shields.io/badge/stable-2.1.1-green.svg)](https://github.com/tomFlidr/class.js/releases)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tomFlidr/class.js/blob/master/LICENCE)
 
  Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection and much more. For all browsers, Node.js and Windows Script Host.
@@ -13,15 +13,15 @@ npm install tomFlidr/class.js
 
 ## **DOWNLOAD**
  
-* [**download class.dev.js (for development with JSDocs comments for IDE)**](https://tomflidr.github.io/class.js/builds/2.1.0/class.dev.js)
-* [**download class.min.js (for production)**](https://tomflidr.github.io/class.js/builds/2.1.0/class.min.js)
+* [**download class.dev.js (for development with JSDocs comments for IDE)**](https://tomflidr.github.io/class.js/builds/2.1.1/class.dev.js)
+* [**download class.min.js (for production)**](https://tomflidr.github.io/class.js/builds/2.1.1/class.min.js)
 
 ```html
 <!-- for production: -->
-<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.1.0/class.min.js"></script>
+<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.1.1/class.min.js"></script>
 
 <!-- for development with JSDocs comments for IDE: -->
-<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.1.0/class.dev.js"></script>
+<script type="text/javascript" src="https://tomflidr.github.io/class.js/builds/2.1.1/class.dev.js"></script>
 ```
 
 ## **DEMOS**
