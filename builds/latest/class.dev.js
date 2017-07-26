@@ -370,6 +370,7 @@ Class = (function (_globalScope) {
 		var _extend = $class._constants.Extend,
 			_nameStr = $class._constants.Name,
 			_classImprint = $class._constants.GetClassUid,
+			_constructorStr = $class._constants.Constructor,
 			_self = $class._constants.self,
 			_static = $class._constants.static,
 			_prototypeStr = 'prototype',
@@ -382,7 +383,7 @@ Class = (function (_globalScope) {
 		 * @type		{Definition}
 		 */
 		var Class = $class._editorIntelliSense
-			? cfg[$class._constants.Constructor]
+			? (cfg[_constructorStr] ? cfg[_constructorStr] : cfg)
 			: function () {
 				return $class._constructor(cfg, this, $class._normalizeArgs(arguments));
 			};
