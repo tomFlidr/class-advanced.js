@@ -13,8 +13,8 @@ npm install tomFlidr/class.js
 
 ## **DOWNLOAD**
  
-* [**download class.dev.js (for development with JSDocs comments for IDE)**](https://tomflidr.github.io/class.js/builds/2.1.2/class.dev.js)
 * [**download class.min.js (for production)**](https://tomflidr.github.io/class.js/builds/2.1.2/class.min.js)
+* [**download class.dev.js (for development with JSDocs comments for IDE)**](https://tomflidr.github.io/class.js/builds/2.1.2/class.dev.js)
 
 ```html
 <!-- for production: -->
