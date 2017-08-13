@@ -8,7 +8,7 @@
 ## **INSTALATION**
 
 ```shell
-npm install tomFlidr/class.js
+npm install oop-class
 ```
 
 ## **DOWNLOAD**
