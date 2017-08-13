@@ -1,14 +1,21 @@
 {
-  "name": "class.js",
+  "name": "oop-class",
   "version": "2.1.3",
   "license": "MIT",
-  "description": "Universal JS library for prototyped classes - extending, constructor, static and dynamic elements, parent methods calls, self reflection. For all browsers, Node.js and Windows Script Host.",
+  "description": "Universal JS classes helper - extending, constructors, static and dynamic elements, parent methods calls, self reflection, late static binding. For all browsers, Node.js, Windows Script Host and Adobe Javascript.",
   "homepage": "https://github.com/tomFlidr/class.js",
   "keywords": [
     "javascript",
     "class",
     "javascript class",
     "javascript oop",
+    "javascript php oop",
+    "javascript late static binding",
+    "javascript static",
+    "javascript self",
+    "javascript class static",
+    "javascript class self",
+    "javascript class reflection",
     "javascript parent",
     "javascript class parent",
     "javascript extends",
@@ -16,8 +23,6 @@
     "javascript extending",
     "javascript extends",
     "javascript extending",
-    "javascript static",
-    "javascript self",
     "javascript dynamic",
     "javascript inheritance",
     "javascript prototypal",
@@ -26,14 +31,15 @@
     "javascript class visual studio",
     "javascript class .net",
     "javascript class vs",
-    "javascript lightweight",
     "javascript cross browser",
     "javascript class universal",
     "javascript class multi environment",
     "javascript class all environment",
     "javascript class all browser",
     "javascript class nodejs",
-    "javascript class windows script host wsh"
+    "javascript class adobe",
+    "javascript class wsh",
+    "javascript class windows script host"
   ],
   "author": {
     "name": "Tom Flidr",
@@ -43,11 +49,11 @@
     "type": "git",
     "url": "https://github.com/tomFlidr/class.js.git"
   },
-  "filename": "builds/latest/class.dev.js",
+  "main": "builds/latest/class.dev.js",
   "autoupdate": {
     "source": "git",
     "target": "git://github.com/tomFlidr/class.js.git",
-    "basePath": "src",
+    "basePath": "",
     "files": [
       "builds/latest/class.min.js",
       "builds/latest/class.dev.js"
