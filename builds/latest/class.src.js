@@ -1,8 +1,8 @@
 /**
- * Javascript Class Helper
+ * @summary Javascript Class Helper
  * @author Tom Flidr <tomflidr@gmail.com>
- * @version 2.1.2
- * @summary 2017-07-26
+ * @version 2.1.3
+ * @date 2017-08-13
  * @example
 
 Class.Define('ClassName', {
@@ -298,27 +298,48 @@ Class = (function (_globalScope) {
 	};
 
 	/**
-	 * @summary										Create class instance as javascript Function type. <br />Throws Error by default if class is not found in global memory space. <br />To change this behaviour, use Class.SetConstructionBehaviour(); <br />Returns Class instance or null if there is no class definition in global memory space.
+	 * @summary												Create class instance as javascript Function type.<br />
+	 *														Throws Error by default if class is not found in global space.<br />
+	 *														To change this behaviour, use Class.SetConstructionBehaviour();<br />
+	 *														If constructorArgs param is not an array, there are used Class.Create(); <br />
+	 *														function arguments without first item 'fullName', then normalized <br />
+	 *														into array and spreaded into class constructor function arguments space.<br />
+	 *														Returns Class instance or null if there is no class definition in global space.
 	 * @access		public
 	 *
-	 * @param		{String}		fullName		Full name of class to define. Required. Example: 'App.Controllers.Books' for 'Books' class name in namespace 'App.Controllers'.
-	 * @param		{...Object=}	constructorArgs	Class constructor function arguments. Repeating parameter. Optional.
+	 * @param		{String}			fullName			Full name of class to define. Required. <br />
+	 *														Example: 'App.Controllers.Books' for 'Books' class name in namespace 'App.Controllers'.
+	 * @param		{Array|...Object=}	constructorArgs		Class constructor function arguments as array spreaded into constructor arguments. Optional.<br />
+	 *														If constructorArgs param is not an array, there are used Class.Create(); <br />
+	 *														function arguments without first item 'fullName', then normalized <br />
+	 *														into array and spreaded into class constructor function arguments space.
 	 *
-	 * @throws		{Error}							If global switch configured by Class.SetConstructionBehaviour() is set to 0 (ErrorIfNotFound) or to 2 (DoNothing), Error should be thrown if class is not found in global memory space.
+	 * @throws		{Error}									If global switch configured by Class.SetConstructionBehaviour() is set to 0 (ErrorIfNotFound) or to 2 (DoNothing), Error should be thrown if class is not found in global memory space.
 	 *
-	 * @return		{Instance|Null}					Class instance or null if global switch configured by Class.SetConstructionBehaviour() is set to 1 (NullIfNotFound), Null should be returned if class is not found in global memory space.
+	 * @return		{Instance|Null}							Class instance or null if global switch configured by Class.SetConstructionBehaviour() is set to 1 (NullIfNotFound), Null should be returned if class is not found in global memory space.
 	 */
-	$class['Create'] = function (fullName) {
+	$class['Create'] = function (fullName, constructorArgs) {
 		/// <signature>
 		///		<summary>Create class instance as javascript Function type. <br />Throws Error by default if class is not found in global memory space. <br />To change this behaviour, use Class.SetConstructionBehaviour(); <br />Returns Class instance or null if there is no class definition in global memory space.</summary>
-		///		<param name="String" type="fullName">Full name of class to define. Required. Example: 'App.Controllers.Books' for 'Books' class name in namespace 'App.Controllers'.</param>
-		///		<param name="...Object" type="constructorArgs" parameterArray="true" optional="true" >Class constructor function arguments. Repeating parameter. Optional.</param>
+		///		<param name="fullName" type="String">Full name of class to define. Required. Example: 'App.Controllers.Books' for 'Books' class name in namespace 'App.Controllers'.</param>
+		///		<param name="constructorArgs" type="...Object" parameterArray="true" optional="true" >Class constructor function arguments. Repeating parameter. Optional.</param>
 		///		<returns type="Instance|Null" />
 		/// </signature>
-		var classDefinition = $class['GetByName'](fullName);
-		var args = $class._normalizeArgs(arguments);
-		if ($class._constructionBehaviour === 1 && !classDefinition) return classDefinition;
-		args.shift(); // remove fullName
+		/// <signature>
+		///		<summary>Create class instance as javascript Function type. <br />Throws Error by default if class is not found in global space. <br />To change this behaviour, use Class.SetConstructionBehaviour(); <br />If constructorArgs param is not an array, there are used Class.Create(); <br />function arguments without first item 'fullName', then normalized <br />into array and spreaded into class constructor function arguments space. <br />Returns Class instance or null if there is no class definition in global space.</summary>
+		///		<param name="fullName" type="String">Full name of class to define. Required. <br />Example: 'App.Controllers.Books' for 'Books' class name in namespace 'App.Controllers'.</param>
+		///		<param name="constructorArgs" type="Array" optional="true">Class constructor function arguments as array spreaded into constructor arguments. Optional. <br />If constructorArgs param is not an array, there are used Class.Create(); <br />function arguments without first item 'fullName', then normalized <br />into array and spreaded into class constructor function arguments space.</param>
+		///		<returns type="Instance|Null" />
+		/// </signature>
+		var classDefinition = $class['GetByName'](fullName),
+			args = [];
+		if (!classDefinition && $class._constructionBehaviour === 1) return classDefinition;
+		if ({}['toString']['apply'](constructorArgs) != '[object Array]' || arguments['length'] > 2) {
+			args = $class._normalizeArgs(arguments);
+			args.shift(); // remove fullName
+		} else {
+			args = $class._normalizeArgs(constructorArgs || []);
+		}
 		args.unshift(classDefinition); // add classDefinition
 		return new (classDefinition.bind.apply(classDefinition, args))();
 	};
@@ -892,7 +913,7 @@ Class = (function (_globalScope) {
 	 */
 	$class._isArgs = function (obj) {
 		// be carefull for WSH - there is no Arguments typed array, there is only Object with callee... but not a string, just object returned by typeof()
-		return typeof(obj) == 'object' && typeof(obj['callee']) != 'undefined' && Object['prototype']['toString']['apply'](obj) != '[object Array]'
+		return typeof(obj) == 'object' && typeof(obj['callee']) != 'undefined' && {}['toString']['apply'](obj) != '[object Array]'
 	};
 
 	// set ClassHelper object into parent environment under 'Class' key

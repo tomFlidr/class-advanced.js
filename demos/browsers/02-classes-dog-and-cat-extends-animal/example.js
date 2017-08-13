@@ -65,7 +65,7 @@ Class.Define('Animal.Cat', {
 });
 
 // Create instances:
-var creature = Class.Create("Animal", "Creature", "Rrroooaaarrr!")
+var creature = Class.Create("Animal", ["Creature", "Rrroooaaarrr!"]);
 var dog = new Animal.Dog("Charlie", "Wrr haf!");
 var cat = Animal.Cat.GetInstance('Suzy', 'Pchchchchch!');
 
