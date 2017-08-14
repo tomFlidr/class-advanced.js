@@ -1,4 +1,4 @@
-# **Javascript Class (Class.js)**
+# **Javascript Class Advanced**
 
 [![Latest Stable Version](https://img.shields.io/badge/stable-2.1.3-green.svg)](https://github.com/tomFlidr/class.js/releases)
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/tomFlidr/class.js/blob/master/LICENCE)
