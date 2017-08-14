@@ -751,7 +751,7 @@ console.log(dog.toString()); // '[object Animal.Dog]'
 - create new empty text file with name "example.js":
 - type into command line window "node example.js" to run
 ```javascript
-require('oop-class');
+require('class-advanced');
 var MyClass = Class({
 	Constructor: function () {
 		console.log("It works!");

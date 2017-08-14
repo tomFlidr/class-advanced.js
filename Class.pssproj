@@ -30,6 +30,8 @@
     <Folder Include="builds\2.0.1\" />
     <Folder Include="builds\2.0.2\" />
     <Folder Include="builds\2.1.0\" />
+    <Folder Include="builds\2.1.1\" />
+    <Folder Include="builds\2.1.2\" />
     <Folder Include="builds\latest\" />
     <Folder Include="demos\" />
     <Folder Include="demos\browsers\" />
@@ -110,6 +112,12 @@
     <Compile Include="builds\2.1.0\class.dev.js" />
     <Compile Include="builds\2.1.0\class.min.js" />
     <Compile Include="builds\2.1.0\class.src.js" />
+    <Compile Include="builds\2.1.1\class.dev.js" />
+    <Compile Include="builds\2.1.1\class.min.js" />
+    <Compile Include="builds\2.1.1\class.src.js" />
+    <Compile Include="builds\2.1.2\class.dev.js" />
+    <Compile Include="builds\2.1.2\class.min.js" />
+    <Compile Include="builds\2.1.2\class.src.js" />
     <Compile Include="builds\latest\class.dev.js" />
     <Compile Include="builds\latest\class.min.js" />
     <Compile Include="builds\latest\class.src.js" />
