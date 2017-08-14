@@ -8,7 +8,7 @@
 ## **INSTALATION**
 
 ```shell
-npm install oop-class
+npm install class-advanced
 ```
 
 ## **DOWNLOAD**
